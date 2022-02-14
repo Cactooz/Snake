@@ -85,3 +85,9 @@ hs_err_pid*
 
 # Dependencies folder
 .deps/
+
+
+###################
+#VS Code .gitignore
+###################
+.vscode

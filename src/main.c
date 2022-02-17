@@ -12,5 +12,7 @@ void init() {
 }
 
 int main() {
+	//Initialize everything
+	init();
 	return 0;
 }

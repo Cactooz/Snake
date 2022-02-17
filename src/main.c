@@ -11,8 +11,15 @@ void init() {
 	TRISDSET = 0x00000fe0;
 }
 
+//Main function for the whole game
 int main() {
 	//Initialize everything
 	init();
+
+	//Run the game
+	while(1) {
+		
+	}
+
 	return 0;
 }

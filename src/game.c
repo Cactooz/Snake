@@ -73,5 +73,15 @@ void snakeDirection() {
 
 void moveSnake() {
 	snakeDirection();
+	
+	//Loop through all the snakePositions
+	for(int i = 0; i < 10; i++) {
+		for(int j = 0; j < 42; j++) {
+			//Remove one from each used snake position
+			if(snakePos[i][j] != 0) {
+				snakePos[i][j]--;
+			}
+		}
+	}
 }
 

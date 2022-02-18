@@ -15,3 +15,6 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Buffer for the OLED display
 extern unsigned char displayBuffer[512];
+
+//Prints out capital letters A-Z on display
+void displayLetter(char ch, unsigned char xPos, unsigned char yPos, unsigned char bool);

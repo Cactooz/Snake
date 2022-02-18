@@ -72,5 +72,6 @@ void snakeDirection() {
 }
 
 void moveSnake() {
+	snakeDirection();
 }
 

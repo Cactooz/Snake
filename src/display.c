@@ -66,19 +66,19 @@ void quickDelay(int time) {
 	for(i = time; i > 0; i--);
 }
 
-void OledPutBuffer(int cb, unsigned char* rgbTx)
+void OledPutBuffer(int size, unsigned char* transmitByte)
 {
-  int ib;
   unsigned char bTmp;
   
+  int i;
   //Write/Read the data
-  for (ib = 0; ib < cb; ib++)
+  for (i = 0; i < size; i++)
   {
 	//Wait for transmitter to be ready
 	while ((SPI2STAT & 0x08) == 0); //0000 1000 . SPITBE = Bit 3
 	
 	//Write the next transmit byte.
-	SPI2BUF = *rgbTx++;
+	SPI2BUF = *transmitByte++;
 
 	//Wait for recieve byte
 	while ((SPI2STAT & 0x1) == 0); //0001 . SPIRBF = Bit 0
@@ -86,7 +86,7 @@ void OledPutBuffer(int cb, unsigned char* rgbTx)
   }
 }
 
-unsigned char Spi2PutByte (unsigned char bVal)
+unsigned char Spi2PutByte (unsigned char value)
 {
   unsigned char bRx;
 
@@ -94,12 +94,12 @@ unsigned char Spi2PutByte (unsigned char bVal)
   while ((SPI2STAT & 0x08) == 0); //0000 1000 . SPITBE = Bit 3
 
   //Write the next transmit byte
-  SPI2BUF = bVal;
+  SPI2BUF = value;
 
   //Wait for receive byte
   while ((SPI2STAT & 0x1) == 0); //0001 . SPIRBF = Bit 0
 
-  //Put the receive byte in the buffer
+  //Put the received byte in the buffer
   bRx = SPI2BUF;
 
   return bRx;
@@ -107,8 +107,6 @@ unsigned char Spi2PutByte (unsigned char bVal)
 
 void OledHostInit()
 {
-
-  unsigned int tcfg;
   //Initialize SPI port 2
   SPI2CON = 0;
   SPI2BRG = 15;
@@ -119,11 +117,11 @@ void OledHostInit()
 
   //Make pins RF4, RF5, and RF6 be outputs
   TRISFCLR = 0x70; //0111 0000
-  PORTFSET = 0x70; //Skulle kunna va CLR
+  PORTFSET = 0x70; 
 
   //Make the RG9 pin be an output.
   TRISGCLR = 0x200;//0010 0000 0000
-  PORTGSET = 0x200; //Skulle kunna va CLR
+  PORTGSET = 0x200; 
 }
 
 void OledDspInit()
@@ -171,19 +169,19 @@ void OledDspInit()
 
 void OledUpdate()
 {
-  unsigned char* pb;
+  unsigned char* pagePart;
 
-  pb = displayBuffer;
+  pagePart = displayBuffer;
 
-  int ipag;
+  int page;
 
-  for(ipag = 0; ipag < 4; ipag++) 
+  for(page = 0; page < 4; page++) 
   {
 	PORTFCLR = 0x10; //0001 0000 . DataCMD = RF4
 
 	//Set page address
 	Spi2PutByte(0x22); //Set page command
-	Spi2PutByte(ipag); //page number
+	Spi2PutByte(page); //page number
 
 	//Start at the left column
 	Spi2PutByte(0x00);
@@ -192,8 +190,8 @@ void OledUpdate()
 	PORTFSET = 0x10; //0001 0000 . DataCMD = RF4
 
 	//Copy this memory page of display data
-	OledPutBuffer(128, pb);
-	pb += 128;
+	OledPutBuffer(128, pagePart);
+	pagePart  += 128;
   }
 }
 

@@ -1,4 +1,5 @@
 #include <stdint.h> 
+#include <stdlib.h>
 #include <pic32mx.h>
 #include "game.h"
 
@@ -8,4 +9,22 @@ unsigned short snakePos[42][10] = {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
+
+//The moving direction of the snake
+//0=left, 1=up, 2=down, 3=right
+unsigned char direction = 0;
+
+//The length of the snake
+unsigned short length = 2;
+
+//Function to intilize the position of the snake
+void gameInit() {
+	//Get a random start position and moving direction
+	unsigned char startX = rand() % 21 + 10;
+	unsigned char startY = rand() % 5 + 3;
+	unsigned char startDirection = rand() % 4;
+
+	//Put the starting position in the snakePos array
+	snakePos[startX][startY] = length;
+}
 

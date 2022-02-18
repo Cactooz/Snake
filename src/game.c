@@ -31,7 +31,7 @@ void gameInit() {
 	unsigned char startDirection = rand() % 4;
 
 	//Put the starting position in the snakePos array
-	snakePos[startX][startY] = length;
+	snakePos[startY][startX] = length;
 }
 
 //Change the snakeDirection depending on the button presses

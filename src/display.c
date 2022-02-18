@@ -61,6 +61,14 @@ unsigned char displayBuffer[512] = //Skärmarrayen
 	0,0,0,0,0,0,0,0
 };
 
+//One array for each capital letter A-Z
+char font[3][30] = 
+{
+  {1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1}, //A
+  {1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,1,1,1,0,1,0,0,0,1,1,1,1,1,0}, //B
+  {1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1}, //C 
+};
+
 void quickDelay(int time) {
 	int i;
 	for(i = time; i > 0; i--);
@@ -211,4 +219,16 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char bool) {
 			displayBuffer[pos] = (displayBuffer[pos] & ~(0x1 << (y%8)));
 		}
 	}
+}
+
+//Prints out capital letters A-Z on display
+void displayLetter(char ch, unsigned char xPos, unsigned char yPos, unsigned char bool)
+{
+  int pixel;
+  if(bool == 1)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), font[ch-0x41][pixel]);
+  else if(bool == 0)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }

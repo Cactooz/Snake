@@ -70,3 +70,7 @@ void snakeDirection() {
 		direction = 3;
 	}
 }
+
+void moveSnake() {
+}
+

@@ -83,5 +83,19 @@ void moveSnake() {
 			}
 		}
 	}
+
+	//Set the head to the new position
+	if(direction == 0) {
+		placeHead(currentX-1, currentY);
+	}
+	else if(direction == 1) {
+		placeHead(currentX, currentY-1);
+	}
+	else if(direction == 2) {
+		placeHead(currentX, currentY+1);		
+	}
+	else if(direction == 3) {
+		placeHead(currentX+1, currentY);		
+	}
 }
 

@@ -11,6 +11,11 @@ void init() {
 	TRISDSET = 0x00000fe0;
 }
 
+//Called on interrupt
+void user_isr() {
+	return;
+}
+
 //Main function for the whole game
 int main() {
 	//Initialize everything

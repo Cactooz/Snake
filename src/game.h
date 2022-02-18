@@ -4,7 +4,7 @@ int getButtons();
 //Enable interrupts with MIPS
 void enable_interrupts();
 
-//Oled functions
+//OLED functions
 void OledHostInit();
 void OledDspInit();
 void OledUpdate();
@@ -13,6 +13,5 @@ void OledPutBuffer(int cb, unsigned char* rgbTx);
 unsigned char Spi2PutByte (unsigned char bVal);
 void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
-//Declare scrrenbuffer
+//Buffer for the OLED display
 extern unsigned char displayBuffer[512];
-

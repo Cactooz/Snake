@@ -28,3 +28,25 @@ void gameInit() {
 	snakePos[startX][startY] = length;
 }
 
+//Change the snakeDirection depending on the button presses
+void snakeDirection() {
+	//Get the current pressed buttons
+	unsigned char buttonState = getButtons();
+
+	//If button 4 is pressed go left
+	if(buttonState & 8) {
+		direction = 0;
+	}
+	//If button 3 is pressed go up
+	else if(buttonState & 4) {
+		direction = 1;
+	}
+	//If button 2 is pressed go down
+	else if(buttonState & 2) {
+		direction = 2;
+	}
+	//If button 1 is pressed go right
+	else if(buttonState & 1) {
+		direction = 3;
+	}
+}

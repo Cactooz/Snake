@@ -27,6 +27,16 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Set the snake heads position
+void placeHead(unsigned char x, unsigned char y) {
+	//Set the position of the snake head
+	snakePos[y][x] = length;
+
+	//Set the current position for the snake head
+	currentX = x;
+	currentY = y;
+}
+
 //Function to intilize the position of the snake
 void gameInit() {
 	//Get a random start position and moving direction
@@ -34,12 +44,8 @@ void gameInit() {
 	unsigned char startY = rand() % 5 + 3;
 	unsigned char startDirection = rand() % 4;
 
-	//Put the starting position in the snakePos array
-	snakePos[startY][startX] = length;
-
-	//Set the current position for the snake head
-	currentX = startX;
-	currentY = startY;
+	//Put the starting position of the head
+	placeHead(startX, startY);
 }
 
 //Change the snakeDirection depending on the button presses

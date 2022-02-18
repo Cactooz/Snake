@@ -58,7 +58,7 @@ unsigned char displayBuffer[512] = //Skärmarrayen
 	0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0
 };
 
 void quickDelay(int time) {
@@ -177,7 +177,7 @@ void OledUpdate()
 
   int ipag;
 
-  for(ipag = 0; ipag < 512; ipag++) 
+  for(ipag = 0; ipag < 4; ipag++) 
   {
 	PORTFCLR = 0x10; //0001 0000 . DataCMD = RF4
 

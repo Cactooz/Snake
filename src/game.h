@@ -8,7 +8,11 @@ void enable_interrupts();
 void OledHostInit();
 void OledDspInit();
 void OledUpdate();
+void quickDelay(int time);
+void OledPutBuffer(int cb, unsigned char* rgbTx);
+unsigned char Spi2PutByte (unsigned char bVal);
 void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Declare scrrenbuffer
 extern unsigned char displayBuffer[512];
+

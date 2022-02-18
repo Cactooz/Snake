@@ -5,6 +5,12 @@ int getButtons();
 void enable_interrupts();
 
 //OLED functions
+void OledHostInit();
+void OledDspInit();
+void OledUpdate();
+void quickDelay(int time);
+void OledPutBuffer(int cb, unsigned char* rgbTx);
+unsigned char Spi2PutByte (unsigned char bVal);
 void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Buffer for the OLED display

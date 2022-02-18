@@ -8,6 +8,7 @@ void enable_interrupts();
 void OledHostInit();
 void OledDspInit();
 void OledUpdate();
+void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Declare scrrenbuffer
 extern unsigned char displayBuffer[512];

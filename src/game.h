@@ -17,4 +17,4 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 extern unsigned char displayBuffer[512];
 
 //Prints out capital letters A-Z on display
-void displayLetter(char ch, unsigned char xPos, unsigned char yPos, unsigned char bool);
+void displayCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned char bool);

@@ -103,7 +103,7 @@ void moveSnake() {
 	}
 }
 
-//Print a 3x3 block for the snake
+//Draw a 3x3 block for the snake
 void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	//Multiply in input coords by 3
 	x = x*3;
@@ -121,7 +121,7 @@ void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	updatePixel(x+2, y+2, state);
 }
 
-//Print the snake on the screen
+//Draw the snake on the screen
 void drawSnake() {
 	unsigned char row;
 	unsigned char column;

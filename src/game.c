@@ -76,9 +76,11 @@ void moveSnake() {
 	//Check if the snakeDirection have changed
 	snakeDirection();
 	
+	unsigned char i;
+	unsigned char j;
 	//Loop through all the snakePositions
-	for(unsigned char i = 0; i < 10; i++) {
-		for(unsigned char j = 0; j < 42; j++) {
+	for(i = 0; i < 10; i++) {
+		for(j = 0; j < 42; j++) {
 			//Remove one from each used snake position
 			if(snakePos[i][j] != 0) {
 				snakePos[i][j]--;
@@ -121,9 +123,11 @@ void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 
 //Print the snake on the screen
 void drawSnake() {
+	unsigned char row;
+	unsigned char column;
 	//Loop through the full snakePos array
-	for(unsigned char row = 0; row < 10; row++) {
-		for(unsigned char column = 0; column < 42; column++) {
+	for(row = 0; row < 10; row++) {
+		for(column = 0; column < 42; column++) {
 			//Turn on the pixel if there is a value in the array, else turn it off
 			if(snakePos[row][column] != 0)
 				drawBlock(row, column, 1);

@@ -102,21 +102,21 @@ void moveSnake() {
 }
 
 //Print a 3x3 block for the snake
-void drawBlock(unsigned char x, unsigned char y, unsigned char bool) {
+void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	//Multiply in input coords by 3
 	x = x*3;
 	y = y*3;
 
 	//Update the pixels
-	updatePixel(x, y, bool);
-	updatePixel(x, y+1, bool);
-	updatePixel(x, y+2, bool);
-	updatePixel(x+1, y, bool);
-	updatePixel(x+1, y+1, bool);
-	updatePixel(x+1, y+2, bool);
-	updatePixel(x+2, y, bool);
-	updatePixel(x+2, y+1, bool);
-	updatePixel(x+2, y+2, bool);
+	updatePixel(x, y, state);
+	updatePixel(x, y+1, state);
+	updatePixel(x, y+2, state);
+	updatePixel(x+1, y, state);
+	updatePixel(x+1, y+1, state);
+	updatePixel(x+1, y+2, state);
+	updatePixel(x+2, y, state);
+	updatePixel(x+2, y+1, state);
+	updatePixel(x+2, y+2, state);
 }
 
 //Print the snake on the screen

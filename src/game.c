@@ -117,3 +117,16 @@ void printBlock(unsigned char x, unsigned char y, unsigned char bool) {
 	updatePixel(x+2, y+2, bool);
 }
 
+//Print the snake on the screen
+void printSnake() {
+	//Loop through the full snakePos array
+	for(unsigned char row = 0; row < 10; row++) {
+		for(unsigned char column = 0; column < 42; column++) {
+			//Turn on the pixel if there is a value in the array, else turn it off
+			if(snakePos[row][column] != 0)
+				printBlock(row, column, 1);
+			else
+				printBlock(row, column, 0);
+		}
+	}
+}

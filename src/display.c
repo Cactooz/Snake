@@ -62,7 +62,7 @@ unsigned char displayBuffer[512] = //Skärmarrayen
 };
 
 //One array for each capital letter A-Z
-char font[25][30] = 
+char font[26][30] = 
 {
   {1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1}, //A
   {1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,1,1,1,0,1,0,0,0,1,1,1,1,1,0}, //B

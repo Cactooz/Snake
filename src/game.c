@@ -42,7 +42,7 @@ void gameInit() {
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
-	unsigned char startDirection = rand() % 4;
+	direction = rand() % 4;
 
 	//Put the starting position of the head
 	placeHead(startX, startY);

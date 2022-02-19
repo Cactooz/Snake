@@ -40,7 +40,6 @@ int main() {
 
 				//Draw the snake
 				printSnake();
-
 				break;
 			case gameOver:
 				//Code for game over menu
@@ -53,6 +52,9 @@ int main() {
 			default:
 				break;
 		}
+		
+		//Delay 500ms
+		delay(500);
 	}
 
 	return 0;

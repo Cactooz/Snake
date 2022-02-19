@@ -255,3 +255,16 @@ void displayCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigne
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }
+
+
+//Print word with length "length" at xPos,yPos
+void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos)
+{
+		int i;
+		for(i = 0; i < length*6; i += 6)
+		{	
+			if(*word)
+				displayCharacterAZ(*word, xPos+i, yPos, 1);
+			word += 1;
+		}
+}

@@ -3,6 +3,7 @@
 #include <pic32mx.h>
 #include "game.h"
 
+//Array for all the posible snake positions and storing the data of the tail
 unsigned short snakePos[10][42] = {
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -72,6 +73,7 @@ void snakeDirection() {
 }
 
 void moveSnake() {
+	//Check if the snakeDirection have changed
 	snakeDirection();
 	
 	//Loop through all the snakePositions

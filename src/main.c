@@ -21,9 +21,40 @@ int main() {
 	//Initialize everything
 	init();
 
+	//Define the gameStates
+	enum gameState{menu, game, gameOver, highscore};
+	//Set the gameState to menu
+	enum gameState gameState = menu;
+
 	//Run the game
 	while(1) {
+		switch(gameState) {
+			case menu:
+				//Code for main menu
+				
+				break;
+			case game:
+				//Code for the game
+				//Move the snake
+				moveSnake();
+
+				//Draw the snake
+				printSnake();
+				break;
+			case gameOver:
+				//Code for game over menu
+
+				break;
+			case highscore:
+				//Code for highscore menu
+
+				break;
+			default:
+				break;
+		}
 		
+		//Delay 500ms
+		delay(500);
 	}
 
 	return 0;

@@ -1,8 +1,11 @@
 //Functions for inputs
-int getButtons();
+unsigned char getButtons();
 
 //Enable interrupts with MIPS
 void enable_interrupts();
+
+//Simple delay function with rough ms, with MIPS
+void delay(int ms);
 
 //OLED functions
 void OledHostInit();
@@ -15,3 +18,8 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Buffer for the OLED display
 extern unsigned char displayBuffer[512];
+
+//Functions for the game
+void gameInit();
+void moveSnake();
+void drawSnake();

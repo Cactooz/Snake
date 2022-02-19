@@ -4,6 +4,9 @@ unsigned char getButtons();
 //Enable interrupts with MIPS
 void enable_interrupts();
 
+//Simple delay function with rough ms, with MIPS
+void delay(int ms);
+
 //OLED functions
 void OledHostInit();
 void OledDspInit();

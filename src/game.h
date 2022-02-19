@@ -15,3 +15,8 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
 
 //Buffer for the OLED display
 extern unsigned char displayBuffer[512];
+
+//Functions for the game
+void gameInit();
+void moveSnake();
+void drawSnake();

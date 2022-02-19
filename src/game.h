@@ -14,7 +14,7 @@ void OledUpdate();
 void quickDelay(int time);
 void OledPutBuffer(int cb, unsigned char* rgbTx);
 unsigned char Spi2PutByte (unsigned char bVal);
-void updatePixel(unsigned char x, unsigned char y, unsigned char bool);
+void updatePixel(unsigned char x, unsigned char y, unsigned char state);
 
 //Buffer for the OLED display
 extern unsigned char displayBuffer[512];

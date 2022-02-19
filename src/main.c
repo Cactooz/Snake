@@ -39,7 +39,7 @@ int main() {
 				moveSnake();
 
 				//Draw the snake
-				printSnake();
+				drawSnake();
 				break;
 			case gameOver:
 				//Code for game over menu

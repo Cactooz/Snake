@@ -21,6 +21,11 @@ int main() {
 	//Initialize everything
 	init();
 
+	//Define the gameStates
+	enum gameState{menu, game, gameOver, highscore};
+	//Set the gameState to menu
+	enum gameState gameState = menu;
+
 	//Run the game
 	while(1) {
 		

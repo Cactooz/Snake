@@ -28,7 +28,31 @@ int main() {
 
 	//Run the game
 	while(1) {
-		
+		switch(gameState) {
+			case menu:
+				//Code for main menu
+				
+				break;
+			case game:
+				//Code for the game
+				//Move the snake
+				moveSnake();
+
+				//Draw the snake
+				printSnake();
+
+				break;
+			case gameOver:
+				//Code for game over menu
+
+				break;
+			case highscore:
+				//Code for highscore menu
+
+				break;
+			default:
+				break;
+		}
 	}
 
 	return 0;

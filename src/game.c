@@ -28,6 +28,13 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Keeping track of the apple count
+unsigned char appleCount = 0;
+
+//The position of the apple
+unsigned char appleX;
+unsigned char appleY;
+
 //Keep track if the snake is alive or not, 0 = alive, 1 = dead
 unsigned char alive = 0;
 
@@ -50,6 +57,33 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+}
+
+//Place an apple on a random position on the screen
+void placeApple() {
+	unsigned char x = rand() % 42;
+	unsigned char y = rand() % 10;
+
+	//Place an apple if the snake isn't there
+	if(!snakePos[y][x]) {
+		appleX = x;
+		appleY = y;
+
+		appleCount++;
+
+		//Add the apple to the screen buffer
+		updatePixel((appleX*3) + 1, (appleY*3) + 1, 1);
+	}
+}
+
+//Check if an apple gets eaten
+void appleEat() {
+	if(currentX == appleX && currentY == appleY) {
+		//Remove the apple
+		appleCount--;
+		//Increase the length of the snake
+		length++;
+	}
 }
 
 //Change the snakeDirection depending on the button presses
@@ -75,6 +109,7 @@ void snakeDirection() {
 	}
 }
 
+//Function for moving the snake around on the screen
 void moveSnake() {	
 	unsigned char i;
 	unsigned char j;
@@ -105,11 +140,18 @@ void moveSnake() {
 
 //Main function for running the game, returns 1 when game over
 unsigned char runGame() {
+	//Place an apple if there are non on the screen
+	if(!appleCount)
+		placeApple();
+
 	//Check if the snakeDirection have changed
 	snakeDirection();
 
 	//Move the snake
 	moveSnake();
+
+	//Check if the snake ate the apple
+	appleEat();
 
 	//Return the current state of the snake
 	return alive;

@@ -124,6 +124,10 @@ void moveSnake() {
 
 //Main function for running the game, returns 1 when game over
 unsigned char runGame() {
+	//Place an apple if there are non on the screen
+	if(!appleCount)
+		placeApple();
+
 	//Check if the snakeDirection have changed
 	snakeDirection();
 

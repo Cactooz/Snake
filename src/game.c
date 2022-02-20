@@ -59,6 +59,18 @@ void initGame() {
 	placeHead(startX, startY);
 }
 
+//Place an apple on a random position on the screen
+void placeApple() {
+	unsigned char x = rand() % 42;
+	unsigned char y = rand() % 10;
+
+	//Place an apple if the snake isn't there
+	if(!snakePos[y][x]) {
+		appleX = x;
+		appleY = y;
+	}
+}
+
 //Change the snakeDirection depending on the button presses
 void snakeDirection() {
 	//Get the current pressed buttons

@@ -31,7 +31,7 @@ int main() {
 	//Define the gameStates
 	enum gameState{menu, game, gameOver, highscore};
 	//Set the gameState to menu
-	enum gameState gameState = game;
+	enum gameState gameState = menu;
 
 	//Used for clearing display
 	int column;

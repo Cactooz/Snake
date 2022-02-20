@@ -94,6 +94,7 @@ void snakeDirection() {
 	}
 }
 
+//Function for moving the snake around on the screen
 void moveSnake() {	
 	unsigned char i;
 	unsigned char j;

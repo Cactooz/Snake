@@ -39,7 +39,7 @@ void placeHead(unsigned char x, unsigned char y) {
 }
 
 //Function to intilize the position of the snake
-void gameInit() {
+void initGame() {
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;

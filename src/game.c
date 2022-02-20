@@ -28,6 +28,13 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Keeping track of the apple count
+unsigned char appleCount = 0;
+
+//The position of the apple
+unsigned char appleX;
+unsigned char appleY;
+
 //Keep track if the snake is alive or not, 0 = alive, 1 = dead
 unsigned char alive = 0;
 

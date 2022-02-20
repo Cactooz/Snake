@@ -28,6 +28,9 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Keep track if the snake is alive or not, 0 = alive, 1 = dead
+unsigned char alive = 0;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -72,10 +75,7 @@ void snakeDirection() {
 	}
 }
 
-void moveSnake() {
-	//Check if the snakeDirection have changed
-	snakeDirection();
-	
+void moveSnake() {	
 	unsigned char i;
 	unsigned char j;
 	//Loop through all the snakePositions
@@ -136,3 +136,16 @@ void drawSnake() {
 		}
 	}
 }
+
+//Main function for running the game, returns 1 when game over
+unsigned char runGame() {
+	//Check if the snakeDirection have changed
+	snakeDirection();
+
+	//Move the snake
+	moveSnake();
+
+	//Return the current state of the snake
+	return alive;
+}
+

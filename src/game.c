@@ -149,3 +149,8 @@ unsigned char runGame() {
 	return alive;
 }
 
+//Main function for drawing everything in the game
+void drawGame() {
+	//Draw the snake
+	drawSnake();
+}

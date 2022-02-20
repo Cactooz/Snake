@@ -165,15 +165,15 @@ void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	y = y*3;
 
 	//Update the pixels
-	updatePixel(x, y, state);
-	updatePixel(x, y+1, state);
-	updatePixel(x, y+2, state);
-	updatePixel(x+1, y, state);
 	updatePixel(x+1, y+1, state);
 	updatePixel(x+1, y+2, state);
-	updatePixel(x+2, y, state);
+	updatePixel(x+1, y+3, state);
 	updatePixel(x+2, y+1, state);
 	updatePixel(x+2, y+2, state);
+	updatePixel(x+2, y+3, state);
+	updatePixel(x+3, y+1, state);
+	updatePixel(x+3, y+2, state);
+	updatePixel(x+3, y+3, state);
 }
 
 //Draw the snake on the screen

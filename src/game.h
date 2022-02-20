@@ -29,3 +29,6 @@ void printWord(char* word, unsigned char length, unsigned char xPos, unsigned ch
 void gameInit();
 void moveSnake();
 void drawSnake();
+
+//Functions for the menu
+void runMenu();

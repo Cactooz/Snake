@@ -51,7 +51,7 @@ void placeHead(unsigned char x, unsigned char y) {
 void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
-	for(int i = 0; i < 128; i++) {
+	for(i = 0; i < 128; i++) {
 		displayBuffer[i] = 1;
 		displayBuffer[334+1] = 8;
 	}

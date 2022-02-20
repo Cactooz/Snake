@@ -48,6 +48,25 @@ void placeHead(unsigned char x, unsigned char y) {
 	currentY = y;
 }
 
+void drawGameBorder() {
+	unsigned char i;
+	//Turn on the top and bottom row
+	for(int i = 0; i < 128; i++) {
+		displayBuffer[i] = 1;
+		displayBuffer[334+1] = 8;
+	}
+
+	//Turn on the most right and most left row of pixels
+	displayBuffer[0] = 255;
+	displayBuffer[128] = 255;
+	displayBuffer[256] = 255;
+	displayBuffer[384] = 255;
+	displayBuffer[127] = 255;
+	displayBuffer[255] = 255;
+	displayBuffer[383] = 255;
+	displayBuffer[511] = 255;
+}
+
 //Function to intilize the position of the snake
 void initGame() {
 	//Get a random start position and moving direction
@@ -57,6 +76,9 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+
+	//Turn on a 1 pixel border around the game area
+	drawGameBorder();
 }
 
 //Place an apple on a random position on the screen

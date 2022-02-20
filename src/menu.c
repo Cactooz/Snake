@@ -26,7 +26,7 @@ unsigned char runMenu()
     //Display text
     printWord("SNAKE", 5, 50, 0);
     printWord("BY", 2, 58, 10);
-    printWord("POTNUS", 6, 20, 20);
+    printWord("PONTUS", 6, 20, 20);
     printWord("AND", 3, 60, 20);
     printWord("HUGO", 4, 83, 20);
     OledUpdate();

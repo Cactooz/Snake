@@ -70,7 +70,7 @@ void placeApple() {
 		appleY = y;
 
 		//Add the apple to the screen buffer
-		updatePixel(appleX + 1, appleY + 1, 1);
+		updatePixel((appleX*3) + 1, (appleY*3) + 1, 1);
 	}
 }
 

@@ -103,6 +103,19 @@ void moveSnake() {
 	}
 }
 
+//Main function for running the game, returns 1 when game over
+unsigned char runGame() {
+	//Check if the snakeDirection have changed
+	snakeDirection();
+
+	//Move the snake
+	moveSnake();
+
+	//Return the current state of the snake
+	return alive;
+}
+
+
 //Draw a 3x3 block for the snake
 void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	//Multiply in input coords by 3
@@ -135,18 +148,6 @@ void drawSnake() {
 				drawBlock(row, column, 0);
 		}
 	}
-}
-
-//Main function for running the game, returns 1 when game over
-unsigned char runGame() {
-	//Check if the snakeDirection have changed
-	snakeDirection();
-
-	//Move the snake
-	moveSnake();
-
-	//Return the current state of the snake
-	return alive;
 }
 
 //Main function for drawing everything in the game

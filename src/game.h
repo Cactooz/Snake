@@ -31,4 +31,4 @@ void moveSnake();
 void drawSnake();
 
 //Functions for the menu
-void runMenu();
+unsigned char runMenu();

@@ -1,8 +1,9 @@
 #include <stdint.h>
 #include <pic32mx.h>
+#include <stdio.h>
 #include "game.h"
 
-void runMenu()
+unsigned char runMenu()
 {
     int column;
     int row;
@@ -54,6 +55,9 @@ void runMenu()
                 delay(300);
                 select = 2;
             }
+            if (getButtons() & 4)
+                return 1;
+            
             break;
         
         case 2:
@@ -66,6 +70,8 @@ void runMenu()
                 delay(300);
                 select = 1;
             }
+            if (getButtons() & 4)
+                return 2;
             break;            
         }
         

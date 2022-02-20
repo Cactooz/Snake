@@ -46,7 +46,9 @@ int main() {
         					for(row = 0; row < 32; row++)
             					updatePixel(column, row, 0);
 
+						//Change the gameState to game and init the game
 						gameState = game;
+						initGame();
 						break;
 					
 					case 2:
@@ -60,13 +62,18 @@ int main() {
 				break;
 			case game:
 				//Code for the game
-				//Move the snake
-				printWord("GAME", 4, 50, 12);
+				//Run the game, if we get 1 back move to gameOver
+				if(runGame())
+					gameState = gameOver;
+
+				//Draw the game and update the screen
+				drawGame();
 				OledUpdate();
 				break;
 			case gameOver:
 				//Code for game over menu
-
+				
+				printWord("GAME OVER", 9, 50, 12);
 				break;
 			case highscore:
 				//Code for highscore menu

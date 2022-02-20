@@ -51,7 +51,7 @@ void placeHead(unsigned char x, unsigned char y) {
 void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
-	for(int i = 0; i < 128; i++) {
+	for(i = 0; i < 128; i++) {
 		displayBuffer[i] = 1;
 		displayBuffer[334+1] = 8;
 	}
@@ -69,6 +69,9 @@ void drawGameBorder() {
 
 //Function to intilize the position of the snake
 void initGame() {
+	//Turn on a 1 pixel border around the game area
+	drawGameBorder();
+
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
@@ -76,9 +79,6 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
-
-	//Turn on a 1 pixel border around the game area
-	drawGameBorder();
 }
 
 //Place an apple on a random position on the screen

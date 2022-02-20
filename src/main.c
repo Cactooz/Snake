@@ -12,6 +12,10 @@ void init() {
 
 	//Set button 2-4 as inputs
 	TRISDSET = 0x00000fe0;
+
+	OledHostInit();
+	OledDspInit();
+	initGame();
 }
 
 //Called on interrupt
@@ -27,13 +31,15 @@ int main() {
 	//Define the gameStates
 	enum gameState{menu, game, gameOver, highscore};
 	//Set the gameState to menu
-	enum gameState gameState = menu;
+	enum gameState gameState = game;
 
 	//Run the game
 	while(1) {
 		switch(gameState) {
 			case menu:
 				//Code for main menu
+				printWord("MENU", 4, 50, 15);
+				OledUpdate();
 				
 				break;
 			case game:
@@ -44,6 +50,7 @@ int main() {
 
 				//Draw the game
 				drawGame();
+				OledUpdate();
 				break;
 			case gameOver:
 				//Code for game over menu

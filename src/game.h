@@ -25,7 +25,8 @@ void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned 
 //Print word with length "length" at xPos,yPos
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos);
 
-//Functions for the game
+//Functions for the menu
+unsigned char runMenu();
 void initGame();
 unsigned char runGame();
 void drawGame();

@@ -13,9 +13,9 @@ void init() {
 	//Set button 2-4 as inputs
 	TRISDSET = 0x00000fe0;
 
+	//Setup display
 	OledHostInit();
 	OledDspInit();
-	initGame();
 }
 
 //Called on interrupt
@@ -33,14 +33,35 @@ int main() {
 	//Set the gameState to menu
 	enum gameState gameState = game;
 
+	//Used for clearing display
+	int column;
+	int row;
+
 	//Run the game
 	while(1) {
 		switch(gameState) {
 			case menu:
-				//Code for main menu
-				printWord("MENU", 4, 50, 15);
-				OledUpdate();
-				
+				switch(runMenu())
+				{
+					case 1:
+						//Clears the screen
+    					for (column = 0; column < 128; column++)
+        					for(row = 0; row < 32; row++)
+            					updatePixel(column, row, 0);
+
+						//Change the gameState to game and init the game
+						gameState = game;
+						initGame();
+						break;
+					
+					case 2:
+						//Clears the screen
+    					for (column = 0; column < 128; column++)
+        					for(row = 0; row < 32; row++)
+            					updatePixel(column, row, 0);
+						gameState = highscore;
+						break;
+				}
 				break;
 			case game:
 				//Code for the game
@@ -48,17 +69,19 @@ int main() {
 				if(runGame())
 					gameState = gameOver;
 
-				//Draw the game
+				//Draw the game and update the screen
 				drawGame();
 				OledUpdate();
 				break;
 			case gameOver:
 				//Code for game over menu
-
+				
+				printWord("GAME OVER", 9, 50, 12);
 				break;
 			case highscore:
 				//Code for highscore menu
-
+				printWord("HIGHSCORE", 9, 50, 12);
+				OledUpdate();
 				break;
 			default:
 				break;

@@ -20,6 +20,6 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char state);
 extern unsigned char displayBuffer[512];
 
 //Functions for the game
-void moveSnake();
-void drawSnake();
 void initGame();
+unsigned char runGame();
+void drawGame();

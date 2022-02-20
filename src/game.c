@@ -178,16 +178,16 @@ void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 
 //Draw the snake on the screen
 void drawSnake() {
-	unsigned char row;
-	unsigned char column;
+	unsigned char y;
+	unsigned char x;
 	//Loop through the full snakePos array
-	for(row = 0; row < 10; row++) {
-		for(column = 0; column < 42; column++) {
+	for(y = 0; y < 10; y++) {
+		for(x = 0; x < 42; x++) {
 			//Turn on the pixel if there is a value in the array, else turn it off
-			if(snakePos[row][column] != 0)
-				drawBlock(row, column, 1);
+			if(snakePos[y][x] != 0)
+				drawBlock(x, y, 1);
 			else
-				drawBlock(row, column, 0);
+				drawBlock(x, y, 0);
 		}
 	}
 }

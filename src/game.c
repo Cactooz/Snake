@@ -28,6 +28,16 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Keeping track of the apple count
+unsigned char appleCount = 0;
+
+//The position of the apple
+unsigned char appleX;
+unsigned char appleY;
+
+//Keep track if the snake is alive or not, 0 = alive, 1 = dead
+unsigned char alive = 0;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -38,8 +48,30 @@ void placeHead(unsigned char x, unsigned char y) {
 	currentY = y;
 }
 
+void drawGameBorder() {
+	unsigned char i;
+	//Turn on the top and bottom row
+	for(i = 0; i < 128; i++) {
+		displayBuffer[i] = 1;
+		displayBuffer[334+1] = 8;
+	}
+
+	//Turn on the most right and most left row of pixels
+	displayBuffer[0] = 255;
+	displayBuffer[128] = 255;
+	displayBuffer[256] = 255;
+	displayBuffer[384] = 255;
+	displayBuffer[127] = 255;
+	displayBuffer[255] = 255;
+	displayBuffer[383] = 255;
+	displayBuffer[511] = 255;
+}
+
 //Function to intilize the position of the snake
-void gameInit() {
+void initGame() {
+	//Turn on a 1 pixel border around the game area
+	drawGameBorder();
+
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
@@ -47,6 +79,33 @@ void gameInit() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+}
+
+//Place an apple on a random position on the screen
+void placeApple() {
+	unsigned char x = rand() % 42;
+	unsigned char y = rand() % 10;
+
+	//Place an apple if the snake isn't there
+	if(!snakePos[y][x]) {
+		appleX = x;
+		appleY = y;
+
+		appleCount++;
+
+		//Add the apple to the screen buffer
+		updatePixel((appleX*3) + 1, (appleY*3) + 1, 1);
+	}
+}
+
+//Check if an apple gets eaten
+void appleEat() {
+	if(currentX == appleX && currentY == appleY) {
+		//Remove the apple
+		appleCount--;
+		//Increase the length of the snake
+		length++;
+	}
 }
 
 //Change the snakeDirection depending on the button presses
@@ -72,10 +131,8 @@ void snakeDirection() {
 	}
 }
 
-void moveSnake() {
-	//Check if the snakeDirection have changed
-	snakeDirection();
-	
+//Function for moving the snake around on the screen
+void moveSnake() {	
 	unsigned char i;
 	unsigned char j;
 	//Loop through all the snakePositions
@@ -103,6 +160,26 @@ void moveSnake() {
 	}
 }
 
+//Main function for running the game, returns 1 when game over
+unsigned char runGame() {
+	//Place an apple if there are non on the screen
+	if(!appleCount)
+		placeApple();
+
+	//Check if the snakeDirection have changed
+	snakeDirection();
+
+	//Move the snake
+	moveSnake();
+
+	//Check if the snake ate the apple
+	appleEat();
+
+	//Return the current state of the snake
+	return alive;
+}
+
+
 //Draw a 3x3 block for the snake
 void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	//Multiply in input coords by 3
@@ -110,29 +187,35 @@ void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
 	y = y*3;
 
 	//Update the pixels
-	updatePixel(x, y, state);
-	updatePixel(x, y+1, state);
-	updatePixel(x, y+2, state);
-	updatePixel(x+1, y, state);
 	updatePixel(x+1, y+1, state);
 	updatePixel(x+1, y+2, state);
-	updatePixel(x+2, y, state);
+	updatePixel(x+1, y+3, state);
 	updatePixel(x+2, y+1, state);
 	updatePixel(x+2, y+2, state);
+	updatePixel(x+2, y+3, state);
+	updatePixel(x+3, y+1, state);
+	updatePixel(x+3, y+2, state);
+	updatePixel(x+3, y+3, state);
 }
 
 //Draw the snake on the screen
 void drawSnake() {
-	unsigned char row;
-	unsigned char column;
+	unsigned char y;
+	unsigned char x;
 	//Loop through the full snakePos array
-	for(row = 0; row < 10; row++) {
-		for(column = 0; column < 42; column++) {
+	for(y = 0; y < 10; y++) {
+		for(x = 0; x < 42; x++) {
 			//Turn on the pixel if there is a value in the array, else turn it off
-			if(snakePos[row][column] != 0)
-				drawBlock(row, column, 1);
+			if(snakePos[y][x] != 0)
+				drawBlock(x, y, 1);
 			else
-				drawBlock(row, column, 0);
+				drawBlock(x, y, 0);
 		}
 	}
+}
+
+//Main function for drawing everything in the game
+void drawGame() {
+	//Draw the snake
+	drawSnake();
 }

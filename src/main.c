@@ -2,6 +2,9 @@
 #include <pic32mx.h>
 #include "game.h"
 
+//Declare stdout as NULL
+void *stdout = (void *) 0;
+
 //Function to initialize everything
 void init() {
 	//Set button 1 as input
@@ -28,7 +31,7 @@ int main() {
 	//Define the gameStates
 	enum gameState{menu, game, gameOver, highscore};
 	//Set the gameState to menu
-	enum gameState gameState = menu;
+	enum gameState gameState = game;
 
 	//Used for clearing display
 	int column;

@@ -245,13 +245,13 @@ void updatePixel(unsigned char x, unsigned char y, unsigned char state) {
 }
 
 //Prints out capital letters A-Z on display
-void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned char bool)
+void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned char state)
 {
   int pixel;
-  if(bool == 1)
+  if(state == 1)
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), font[ch-0x41][pixel]);
-  else if(bool == 0)
+  else if(state == 0)
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }

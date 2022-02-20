@@ -9,6 +9,10 @@ void init() {
 
 	//Set button 2-4 as inputs
 	TRISDSET = 0x00000fe0;
+
+	//Setup display
+	OledHostInit();
+	OledDspInit();
 }
 
 //Called on interrupt
@@ -30,8 +34,7 @@ int main() {
 	while(1) {
 		switch(gameState) {
 			case menu:
-				//Code for main menu
-				
+				runMenu();
 				break;
 			case game:
 				//Code for the game

@@ -76,6 +76,16 @@ void placeApple() {
 	}
 }
 
+//Check if an apple gets eaten
+void appleEat() {
+	if(currentX == appleX && currentY == appleY) {
+		//Remove the apple
+		appleCount--;
+		//Increase the length of the snake
+		length++;
+	}
+}
+
 //Change the snakeDirection depending on the button presses
 void snakeDirection() {
 	//Get the current pressed buttons
@@ -139,6 +149,9 @@ unsigned char runGame() {
 
 	//Move the snake
 	moveSnake();
+
+	//Check if the snake ate the apple
+	appleEat();
 
 	//Return the current state of the snake
 	return alive;

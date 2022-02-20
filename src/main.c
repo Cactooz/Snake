@@ -2,6 +2,9 @@
 #include <pic32mx.h>
 #include "game.h"
 
+//Declare stdout as NULL
+void *stdout = (void *) 0;
+
 //Function to initialize everything
 void init() {
 	//Set button 1 as input

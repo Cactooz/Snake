@@ -26,6 +26,6 @@ void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned 
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos);
 
 //Functions for the game
-void gameInit();
-void moveSnake();
-void drawSnake();
+void initGame();
+unsigned char runGame();
+void drawGame();

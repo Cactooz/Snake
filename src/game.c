@@ -28,6 +28,9 @@ unsigned short length = 2;
 unsigned char currentX;
 unsigned char currentY;
 
+//Keep track if the snake is alive or not, 0 = alive, 1 = dead
+unsigned char alive = 0;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -39,7 +42,7 @@ void placeHead(unsigned char x, unsigned char y) {
 }
 
 //Function to intilize the position of the snake
-void gameInit() {
+void initGame() {
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
@@ -72,10 +75,7 @@ void snakeDirection() {
 	}
 }
 
-void moveSnake() {
-	//Check if the snakeDirection have changed
-	snakeDirection();
-	
+void moveSnake() {	
 	unsigned char i;
 	unsigned char j;
 	//Loop through all the snakePositions
@@ -102,6 +102,19 @@ void moveSnake() {
 		placeHead(currentX+1, currentY);		
 	}
 }
+
+//Main function for running the game, returns 1 when game over
+unsigned char runGame() {
+	//Check if the snakeDirection have changed
+	snakeDirection();
+
+	//Move the snake
+	moveSnake();
+
+	//Return the current state of the snake
+	return alive;
+}
+
 
 //Draw a 3x3 block for the snake
 void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
@@ -135,4 +148,10 @@ void drawSnake() {
 				drawBlock(row, column, 0);
 		}
 	}
+}
+
+//Main function for drawing everything in the game
+void drawGame() {
+	//Draw the snake
+	drawSnake();
 }

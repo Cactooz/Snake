@@ -38,11 +38,12 @@ int main() {
 				break;
 			case game:
 				//Code for the game
-				//Move the snake
-				moveSnake();
+				//Run the game, if we get 1 back move to gameOver
+				if(runGame())
+					gameState = gameOver;
 
-				//Draw the snake
-				drawSnake();
+				//Draw the game
+				drawGame();
 				break;
 			case gameOver:
 				//Code for game over menu

@@ -22,6 +22,9 @@ extern unsigned char displayBuffer[512];
 //Prints out capital letters A-Z on display
 void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned char state);
 
+//Prints out digits 1 - 9 on display
+void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, unsigned char state);
+
 //Print word with length "length" at xPos,yPos
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos);
 
@@ -33,3 +36,4 @@ void drawGame();
 
 //Functions for highscore
 void nameSelect();
+void displayHighscore();

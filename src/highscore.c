@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include "game.h"
 
-int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
+int highscoreArray[3][4]  = //Initial 1, Initial 2, Score
 {
-    {'P', 'B', 37},
-    {'W', 'H', 23},
-    {'M', 'H', 32},
+    {'P', 'B', 3, 7},
+    {'W', 'H', 2, 3},
+    {'M', 'H', 3, 2},
 };
 
 void nameSelect()
@@ -58,3 +58,15 @@ void nameSelect()
     }
     
 }
+
+void displayHighscore()
+{
+    //First position
+    printDigit(1,42,5,1);
+    printCharacterAZ(highscoreArray[0][0], 50, 5, 1); //First initial
+    printCharacterAZ(highscoreArray[0][1], 58, 5, 1); //Second initial
+    printDigit(highscoreArray[0][2], 66, 5, 1); //First number
+    printDigit(highscoreArray[0][3], 74, 5, 1); //Second number
+}
+
+//void addHighscore(), lägger till ett highscore i arrayen

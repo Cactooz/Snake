@@ -93,6 +93,21 @@ char font[27][30] =
   {0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,0,0}, //91 = SELECT
 };
 
+char numberFont[9][30] = 
+{
+  {0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,1,1,1,1}, //Number 1
+  {0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1}, //Number 2 
+  {1,1,1,1,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,0}, //Number 3
+  {1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1}, //Number 4 
+  {1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,0}, //Number 5 
+  {0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,1,1,1,0}, //Number 6 
+  {1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0}, //Number 7 
+  {1,1,1,1,1,1,0,0,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1}, //Number 8 
+  {1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1}, //Number 9 
+};
+
+
+
 void quickDelay(int time) {
 	int i;
 	for(i = time; i > 0; i--);
@@ -252,6 +267,18 @@ void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned 
   if(state == 1)
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), font[ch-0x41][pixel]);
+  else if(state == 0)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
+}
+
+//Prints out digits 1 - 9 on display
+void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, unsigned char state)
+{
+  int pixel;
+  if(state == 1)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), numberFont[digit-1][pixel]);
   else if(state == 0)
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);

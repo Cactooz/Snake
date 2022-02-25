@@ -30,3 +30,6 @@ unsigned char runMenu();
 void initGame();
 unsigned char runGame();
 void drawGame();
+
+//Functions for highscore
+void nameSelect();

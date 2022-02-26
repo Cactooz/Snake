@@ -38,5 +38,5 @@ unsigned char runGame();
 void drawGame();
 
 //Functions for highscore
-void nameSelect();
 unsigned char displayHighscore();
+unsigned char addHighscore(int score);

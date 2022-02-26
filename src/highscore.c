@@ -28,59 +28,10 @@ unsigned char podiumDesign[512] =
 
 int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
 {
-    {'P', 'B', 370},
-    {'M', 'H', 320},
-    {'W', 'H', 230},
+    //{'P', 'B', 370},
+    //{'M', 'H', 320},
+    //{'W', 'H', 230},
 };
-
-void nameSelect()
-{
-    printWord("NAME", 4, 35, 2);
-    printWord("SELECT", 6, 65, 2); //30 pixlar mellan orden
-    updatePixel(61, 21, 1);
-    int i = 'A';
-    int x = 1;
-    while (x == 1) //Choose first character
-    {
-        unsigned char buttonState = getButtons();
-        printCharacterAZ(i, 55, 16, 1);
-        OledUpdate();
-        if (buttonState & 8) //BTN4 Change character
-        {
-            printCharacterAZ(i,55,16,0);
-            i++;
-            delay(300);
-        }  
-
-        if(i == 'Z' + 1) //Jump to beginning
-            i = 'A';
-
-        if(buttonState & 4) //BTN3 Select character
-        {
-            x = 2;
-            delay(300);
-        }
-    }
-
-    i = 'A';
-
-    while (x == 2) //Choose second character
-    {
-        unsigned char buttonState = getButtons();
-        printCharacterAZ(i, 63, 16, 1);
-        OledUpdate();
-        if (buttonState & 8) //BTN4 Change character
-        {
-            printCharacterAZ(i,63,16,0);
-            i++;
-            delay(300);
-        }
-
-        if(i == 'Z' + 1) //Jump to beginning
-            i = 'A';
-    }
-    
-}
 
 unsigned char displayHighscore()
 {   
@@ -120,3 +71,108 @@ unsigned char displayHighscore()
 }
 
 //void addHighscore(), lägger till ett highscore i arrayen
+unsigned char addHighscore(int score)
+{
+    char first;
+    char second;
+    printWord("NAME", 4, 35, 2);
+    printWord("SELECT", 6, 65, 2);
+    updatePixel(61, 21, 1);
+    char ch = 'A';
+    unsigned char x = 1;
+    while (x == 1) //Choose first character
+    {
+        unsigned char buttonState = getButtons();
+        printCharacterAZ(ch, 55, 16, 1);
+        OledUpdate();
+        if (buttonState & 8) //BTN4 Change character
+        {
+            printCharacterAZ(ch,55,16,0);
+            ch++;
+            delay(300);
+        }  
+
+        if(ch == 'Z' + 1) //Jump to beginning
+            ch = 'A';
+
+        if(buttonState & 4) //BTN3 Select character
+        {
+            first = ch;
+            x = 2;
+            delay(300);
+        }
+    }
+
+    ch = 'A';
+
+    while (x == 2) //Choose second character
+    {
+        unsigned char buttonState = getButtons();
+        printCharacterAZ(ch, 63, 16, 1);
+        OledUpdate();
+        if (buttonState & 8) //BTN4 Change character
+        {
+            printCharacterAZ(ch,63,16,0);
+            ch++;
+            delay(300);
+        }
+
+        if(buttonState & 4) //BTN3 Select character
+        {
+            second = ch;
+            x = 3;
+            delay(300);
+        }
+
+        if(ch == 'Z' + 1) //Jump to beginning
+            ch = 'A';
+    }
+
+    unsigned char i = 0;
+    while (highscoreArray[i][2])
+    {
+        if(i == 2)
+            break;
+        i++;
+    }
+    
+    //if (i != 2) //Empty place
+    //{
+    //    highscoreArray[i][0] = first;
+    //    highscoreArray[i][1] = second;
+    //    highscoreArray[i][2] = score;
+    //}
+
+    //highscoreArray[2][0] = first;
+    //highscoreArray[2][1] = second;
+    //highscoreArray[2][2] = score;    
+
+    if(score > highscoreArray[0][2])
+    {
+        highscoreArray[0][0] = first;
+        highscoreArray[0][1] = second;
+        highscoreArray[0][2] = score;
+    }
+
+    else if(score > highscoreArray[1][2])
+    {
+        highscoreArray[1][0] = first;
+        highscoreArray[1][1] = second;
+        highscoreArray[1][2] = score;
+    }
+
+    else if(score > highscoreArray[2][2])
+    {
+        highscoreArray[2][0] = first;
+        highscoreArray[2][1] = second;
+        highscoreArray[2][2] = score;
+    }
+    return 1;
+
+    
+    //Name select här 
+    //Kollar om det finns en tom plats i arrayen med while loop
+    //Jämför med första plats, if
+    //Jämför med andra plats, else if
+    //Jämför med tredje plats, else if 
+}

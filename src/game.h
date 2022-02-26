@@ -29,7 +29,7 @@ void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, uns
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos);
 
 //Print number with length "length" at xPos,yPos
-void printNumber(unsigned char* number, unsigned char length, unsigned char xPos, unsigned char yPos);
+void printNumber(int number, unsigned char xPos, unsigned char yPos);
 
 //Functions for the menu
 unsigned char runMenu();

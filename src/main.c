@@ -80,7 +80,8 @@ int main() {
 				break;
 			case highscore:
 				//Code for highscore menu
-				printWord("HIGHSCORE", 9, 50, 12);
+				if(displayHighscore())
+					gameState = menu;
 				OledUpdate();
 				break;
 			default:

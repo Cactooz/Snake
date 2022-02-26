@@ -296,3 +296,15 @@ void printWord(char* word, unsigned char length, unsigned char xPos, unsigned ch
 			word += 1;
 		}
 }
+
+//Print word with length "length" at xPos,yPos
+void printNumber(unsigned char* number, unsigned char length, unsigned char xPos, unsigned char yPos)
+{
+		int i;
+		for(i = 0; i < length*6; i += 6)
+		{	
+			if(*number)
+				printDigit(*number, xPos+i, yPos, 1);
+			number += 1;
+		}
+}

@@ -93,8 +93,9 @@ char font[27][30] =
   {0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,0,0}, //91 = SELECT
 };
 
-char numberFont[9][30] = 
+char numberFont[10][30] = 
 {
+  {1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1}, //Number 0
   {0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,1,1,1,1}, //Number 1
   {0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1}, //Number 2 
   {1,1,1,1,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,0}, //Number 3
@@ -278,7 +279,7 @@ void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, uns
   int pixel;
   if(state == 1)
     for(pixel = 0; pixel < 30; pixel++)
-      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), numberFont[digit-1][pixel]);
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), numberFont[digit][pixel]);
   else if(state == 0)
     for(pixel = 0; pixel < 30; pixel++)
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);

@@ -298,13 +298,26 @@ void printWord(char* word, unsigned char length, unsigned char xPos, unsigned ch
 }
 
 //Print word with length "length" at xPos,yPos
-void printNumber(unsigned char* number, unsigned char length, unsigned char xPos, unsigned char yPos)
+void printNumber(int number, unsigned char xPos, unsigned char yPos)
 {
+    //Split number in to an array with length
+    unsigned char count = 1;
+    int tempNumber = number;
+    while(tempNumber/=10) //Counts number of digits in number
+      count++;
+    
+    unsigned char numberArray[count];
 		int i;
-		for(i = 0; i < length*6; i += 6)
-		{	
-			if(*number)
-				printDigit(*number, xPos+i, yPos, 1);
-			number += 1;
-		}
+    for(i = 0; i < count; i++) //Put every digit in array
+    {
+      numberArray[i] = number % 10;
+      number /= 10;
+    }
+
+    int j = 0;
+		for(i = 0; i < count*6; i += 6)
+    {
+				printDigit(numberArray[count - 1 - j], xPos+i, yPos, 1);
+        j++;
+    }
 }

@@ -26,11 +26,11 @@ unsigned char podiumDesign[512] =
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
 
-int highscoreArray[3][4]  = //Initial 1, Initial 2, Score
+int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
 {
-    {'P', 'B', 3, 7},
-    {'W', 'H', 2, 3},
-    {'M', 'H', 3, 2},
+    {'P', 'B', 370},
+    {'M', 'H', 320},
+    {'W', 'H', 230},
 };
 
 void nameSelect()
@@ -82,18 +82,41 @@ void nameSelect()
     
 }
 
-void displayHighscore()
+unsigned char displayHighscore()
 {   
     int i;
     for(i = 0; i<512; i++)
         displayBuffer[i] = podiumDesign[i];
-    //First position
-    //printDigit(1,42,5,1);
-    //printNumber(12, 50, 15,1);
-    //printCharacterAZ(highscoreArray[0][0], 50, 5, 1); //First initial
-    //printCharacterAZ(highscoreArray[0][1], 58, 5, 1); //Second initial
-    //printDigit(highscoreArray[0][2], 66, 5, 1); //First number
-    //printDigit(highscoreArray[0][3], 74, 5, 1); //Second number
+
+    //First place
+    printCharacterAZ(highscoreArray[0][0], 45, 5, 1);
+    printCharacterAZ(highscoreArray[0][1], 51, 5, 1);
+    printNumber(highscoreArray[0][2], 60, 5);
+
+    //Second place
+    printCharacterAZ(highscoreArray[1][0], 90, 12, 1);
+    printCharacterAZ(highscoreArray[1][1], 96, 12, 1);
+    printNumber(highscoreArray[1][2], 105, 12);
+
+    //Third place
+    printCharacterAZ(highscoreArray[2][0], 5, 20, 1);
+    printCharacterAZ(highscoreArray[2][1], 11, 20, 1);
+    printNumber(highscoreArray[2][2], 20, 20);
+
+    OledUpdate();
+    while (1)
+    {
+        if(getButtons() & 8)
+        {
+            int column;
+            int row;
+            for (column = 0; column < 128; column++) //Turns off every pixel
+                for(row = 0; row < 32; row++)
+                    updatePixel(column, row, 0);
+            return 1;
+        }
+        delay(100);
+    }
 }
 
 //void addHighscore(), lägger till ett highscore i arrayen

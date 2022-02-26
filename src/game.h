@@ -39,4 +39,4 @@ void drawGame();
 
 //Functions for highscore
 void nameSelect();
-void displayHighscore();
+unsigned char displayHighscore();

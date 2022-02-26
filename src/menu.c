@@ -3,42 +3,49 @@
 #include <stdio.h>
 #include "game.h"
 
+int runs = 1;
+
 unsigned char runMenu()
 {
     int column;
     int row;
 
     //Loading
-    for (column = 0; column < 128; column++)
+    if (runs)
     {
-        for(row = 0; row < 32; row++)
-            updatePixel(column, row, 1);
+        for (column = 0; column < 128; column++)
+        {
+            for(row = 0; row < 32; row++)
+                updatePixel(column, row, 1);
+
+            OledUpdate();
+            delay(10);
+        }
+        //Turn off every pixel
+        for (column = 0; column < 128; column++)
+            for(row = 0; row < 32; row++)
+                updatePixel(column, row, 0);
+
+        //Display text
+        printWord("SNAKE", 5, 50, 0);
+        printWord("BY", 2, 58, 10);
+        printWord("PONTUS", 6, 20, 20);
+        printWord("AND", 3, 60, 20);
+        printWord("HUGO", 4, 83, 20);
+        OledUpdate();
+
+         delay(3000);
+
+        //Turn off every pixel
+        for (column = 0; column < 128; column++)
+            for(row = 0; row < 32; row++)
+                updatePixel(column, row, 0);
 
         OledUpdate();
-        delay(10);
+        runs = 0; //Makes sure the loadingscreen only runs once :P
     }
-
-    //Turn off every pixel
-    for (column = 0; column < 128; column++)
-        for(row = 0; row < 32; row++)
-            updatePixel(column, row, 0);
-
-    //Display text
-    printWord("SNAKE", 5, 50, 0);
-    printWord("BY", 2, 58, 10);
-    printWord("PONTUS", 6, 20, 20);
-    printWord("AND", 3, 60, 20);
-    printWord("HUGO", 4, 83, 20);
-    OledUpdate();
-
-    delay(3000);
-
-    //Turn off every pixel
-    for (column = 0; column < 128; column++)
-        for(row = 0; row < 32; row++)
-            updatePixel(column, row, 0);
-
-    OledUpdate();
+    
+    
 
     int select = 1;
     while (1)

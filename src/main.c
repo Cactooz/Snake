@@ -46,7 +46,7 @@ int main() {
 				clearDisplay();
 				switch(runMenu())
 				{
-					case 1: //Easy
+					case 1: //Play
 						//Clears the screen
     					clearDisplay();
 
@@ -56,17 +56,11 @@ int main() {
 						initGame();
 						break;
 					
-					case 2: //Hard
+					case 2: //Leaderboard
 						//Clears the screen
     					clearDisplay();
-						speed = 3;
-						gameState = game;
-						initGame();
-						break;
-
-					case 3: //Leaderboard
-						clearDisplay();
 						gameState = highscore;
+						break;
 				}
 				break;
 			case game:

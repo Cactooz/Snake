@@ -13,6 +13,12 @@ void init() {
 	//Set button 2-4 as inputs
 	TRISDSET = 0x00000fe0;
 
+	//Setup for lamps
+	TRISECLR = 0x000000ff;
+	PORTECLR = 0x000000ff;
+
+	PORTE = 0;
+
 	//Setup display
 	OledHostInit();
 	OledDspInit();
@@ -57,12 +63,13 @@ int main() {
 				break;
 			case game:
 				//Code for the game
-				//Run the game, if we get 1 back move to gameOver
-				if(runGame())
+				//Run the game, if we get 0 back move to gameOver
+				if(!runGame())
 					gameState = gameOver;
+				else	
+					//Draw the game and update the screen
+					drawGame();
 
-				//Draw the game and update the screen
-				drawGame();
 				OledUpdate();
 				break;
 			case gameOver:

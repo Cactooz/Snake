@@ -35,8 +35,8 @@ unsigned char appleCount = 0;
 unsigned char appleX;
 unsigned char appleY;
 
-//Keep track if the snake is alive or not, 0 = alive, 1 = dead
-unsigned char alive = 0;
+//Keep track if the snake is alive or not, 1 = alive, 0 = dead
+unsigned char alive = 1;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
@@ -52,8 +52,8 @@ void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
 	for(i = 0; i < 128; i++) {
-		displayBuffer[i] = 1;
-		displayBuffer[334+1] = 8;
+		updatePixel(i,0, 1);
+		updatePixel(i,31, 1);
 	}
 
 	//Turn on the most right and most left row of pixels
@@ -69,6 +69,17 @@ void drawGameBorder() {
 
 //Function to intilize the position of the snake
 void initGame() {
+	//Clear the snakePos array
+	unsigned char y;
+	unsigned char x;
+	//Loop through the full snakePos array
+	for(y = 0; y < 10; y++) {
+		for(x = 0; x < 42; x++) {
+			//Clear the pos value
+			snakePos[y][x] = 0;
+		}
+	}
+
 	//Turn on a 1 pixel border around the game area
 	drawGameBorder();
 
@@ -79,6 +90,11 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+
+	//Reset the data variables
+	appleCount = 0;
+	length = 2;
+	alive = 1;
 }
 
 //Place an apple on a random position on the screen
@@ -160,6 +176,13 @@ void moveSnake() {
 	}
 }
 
+//Check if the snake is outside of the screen and kill it
+void deathCheck() {
+	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9) {
+		alive = 0;
+	}
+}
+
 //Main function for running the game, returns 1 when game over
 unsigned char runGame() {
 	//Place an apple if there are non on the screen
@@ -175,6 +198,9 @@ unsigned char runGame() {
 	//Check if the snake ate the apple
 	appleEat();
 
+	//Check if the snake died
+	deathCheck();
+	
 	//Return the current state of the snake
 	return alive;
 }

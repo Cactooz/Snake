@@ -198,6 +198,9 @@ unsigned char runGame() {
 	//Check if the snake ate the apple
 	appleEat();
 
+	//Check if the snake died
+	deathCheck();
+	
 	//Return the current state of the snake
 	return alive;
 }

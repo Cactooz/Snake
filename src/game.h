@@ -34,7 +34,7 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos);
 
 //Functions for the menu
 unsigned char runMenu();
-unsigned char chooseDifficulty();
+void chooseDifficulty();
 
 //Game functions
 void initGame();

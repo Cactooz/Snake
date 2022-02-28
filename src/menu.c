@@ -19,7 +19,7 @@ unsigned char runMenu()
                 updatePixel(column, row, 1);
 
             OledUpdate();
-            delay(10);
+            delay(5);
         }
         clearDisplay();
 
@@ -31,7 +31,7 @@ unsigned char runMenu()
         printWord("HUGO", 4, 83, 20);
         OledUpdate();
 
-         delay(3000);
+         delay(2000);
 
         clearDisplay();
 
@@ -57,7 +57,10 @@ unsigned char runMenu()
                 select = 2;
             }
             if (getButtons() & 4)
-                return chooseDifficulty();
+            {
+                    chooseDifficulty();
+                    return 1;
+            }
             break;
         
         case 2:
@@ -71,10 +74,9 @@ unsigned char runMenu()
                 select = 1;
             }
             if (getButtons() & 4)
-                return 3;
+                return 2;
             break;            
         }
-        
         OledUpdate();
     }
     
@@ -82,14 +84,15 @@ unsigned char runMenu()
     
 }
 
-unsigned char chooseDifficulty()
+void chooseDifficulty()
 {
     int row;
     int column;
     //Turn off every pixel
     clearDisplay();
     int select = 1;
-    while (1)
+    unsigned char loop = 1;
+    while (loop)
     {
         switch (select)
         {
@@ -104,7 +107,10 @@ unsigned char chooseDifficulty()
                 select = 2;
             }
             if (getButtons() & 4)
-                return 1;
+            {
+                speed = 10;
+                loop = 0;
+            }
             
             break;
         
@@ -119,8 +125,11 @@ unsigned char chooseDifficulty()
                 select = 1;
             }
             if (getButtons() & 4)
-                return 2;
-            break;            
+            {
+                speed = 3;
+                loop = 0;
+            }
+            break;
         }
         
         OledUpdate();

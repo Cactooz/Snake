@@ -252,6 +252,11 @@ void drawSnake() {
 	}
 }
 
+void drawApple() {
+	//Add the apple to the screen buffer
+	updatePixel((appleX*3) + 2,(appleY*3) + 2,1);
+}
+
 //Main function for drawing everything in the game
 void drawGame() {
 	//Draw the snake

@@ -115,9 +115,6 @@ void placeApple() {
 		appleY = y;
 
 		appleCount++;
-
-		//Add the apple to the screen buffer
-		updatePixel((appleX*3) + 1, (appleY*3) + 1, 1);
 	}
 }
 
@@ -199,18 +196,21 @@ unsigned char runGame() {
 	//Check if the snakeDirection have changed
 	snakeDirection();
 
-	//Move the snake
-	moveCounter++;
+	//Only update every once in a while
 	if(moveCounter > speed) {
+		//Move the snake
 		moveSnake();
+		//Check if the snake ate the apple
+		appleEat();
+		//Display the points on the lamps
+		PORTE=(length-2);
+		//Check if the snake died
+		deathCheck();
+		//Reset the counter
 		moveCounter = 0;
 	}
-
-	//Check if the snake ate the apple
-	appleEat();
-
-	//Check if the snake died
-	deathCheck();
+	else
+		moveCounter++;
 	
 	//Return the current state of the snake
 	return alive;
@@ -251,8 +251,15 @@ void drawSnake() {
 	}
 }
 
+void drawApple() {
+	//Add the apple to the screen buffer
+	updatePixel((appleX*3) + 2,(appleY*3) + 2,1);
+}
+
 //Main function for drawing everything in the game
 void drawGame() {
 	//Draw the snake
 	drawSnake();
+	//Draw the apple
+	drawApple();
 }

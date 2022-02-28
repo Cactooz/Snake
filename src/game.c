@@ -176,6 +176,13 @@ void moveSnake() {
 	}
 }
 
+//Check if the snake is outside of the screen and kill it
+void deathCheck() {
+	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9) {
+		alive = 0;
+	}
+}
+
 //Main function for running the game, returns 1 when game over
 unsigned char runGame() {
 	//Place an apple if there are non on the screen

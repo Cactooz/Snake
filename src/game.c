@@ -24,6 +24,9 @@ unsigned char direction;
 //The length of the snake
 unsigned short length;
 
+//The speed of the snake
+unsigned char speed;
+
 //The position of the snake
 unsigned char currentX;
 unsigned char currentY;

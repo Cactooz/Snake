@@ -322,3 +322,10 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos)
         j++;
     }
 }
+
+void clearDisplay()
+{
+  int i;
+  for(i = 0; i < 512; i++)
+    displayBuffer[i] = 0;
+}

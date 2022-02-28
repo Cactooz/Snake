@@ -13,6 +13,12 @@ void init() {
 	//Set button 2-4 as inputs
 	TRISDSET = 0x00000fe0;
 
+	//Setup for lamps
+	TRISECLR = 0x000000ff;
+	PORTECLR = 0x000000ff;
+
+	PORTE = 0;
+
 	//Setup display
 	OledHostInit();
 	OledDspInit();

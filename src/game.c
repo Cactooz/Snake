@@ -19,24 +19,24 @@ unsigned short snakePos[10][42] = {
 
 //The moving direction of the snake
 //0=left, 1=up, 2=down, 3=right
-unsigned char direction = 0;
+unsigned char direction;
 
 //The length of the snake
-unsigned short length = 2;
+unsigned short length;
 
 //The position of the snake
 unsigned char currentX;
 unsigned char currentY;
 
 //Keeping track of the apple count
-unsigned char appleCount = 0;
+unsigned char appleCount;
 
 //The position of the apple
 unsigned char appleX;
 unsigned char appleY;
 
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
-unsigned char alive = 1;
+unsigned char alive;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {

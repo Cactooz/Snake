@@ -115,9 +115,6 @@ void placeApple() {
 		appleY = y;
 
 		appleCount++;
-
-		//Add the apple to the screen buffer
-		updatePixel((appleX*3) + 1, (appleY*3) + 1, 1);
 	}
 }
 

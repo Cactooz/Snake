@@ -261,4 +261,6 @@ void drawApple() {
 void drawGame() {
 	//Draw the snake
 	drawSnake();
+	//Draw the apple
+	drawApple();
 }

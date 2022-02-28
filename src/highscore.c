@@ -61,9 +61,7 @@ unsigned char displayHighscore()
         {
             int column;
             int row;
-            for (column = 0; column < 128; column++) //Turns off every pixel
-                for(row = 0; row < 32; row++)
-                    updatePixel(column, row, 0);
+            clearDisplay();
             return 1;
         }
         delay(100);
@@ -135,18 +133,7 @@ unsigned char addHighscore(int score)
             break;
         i++;
     }
-    
-    //if (i != 2) //Empty place
-    //{
-    //    highscoreArray[i][0] = first;
-    //    highscoreArray[i][1] = second;
-    //    highscoreArray[i][2] = score;
-    //}
-
-    //highscoreArray[2][0] = first;
-    //highscoreArray[2][1] = second;
-    //highscoreArray[2][2] = score;    
-
+      
     if(score > highscoreArray[0][2])
     {
         highscoreArray[0][0] = first;

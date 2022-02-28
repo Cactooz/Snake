@@ -52,8 +52,8 @@ void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
 	for(i = 0; i < 128; i++) {
-		displayBuffer[i] = 1;
-		displayBuffer[334+1] = 8;
+		updatePixel(i,0, 1);
+		updatePixel(i,31, 1);
 	}
 
 	//Turn on the most right and most left row of pixels

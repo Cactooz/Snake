@@ -36,9 +36,13 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos);
 unsigned char runMenu();
 unsigned char chooseDifficulty();
 
+//Game functions
 void initGame();
 unsigned char runGame();
 void drawGame();
+
+//Variable for the length of the snake
+extern unsigned short length;
 
 //Functions for highscore
 unsigned char displayHighscore();

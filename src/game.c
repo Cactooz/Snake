@@ -198,7 +198,7 @@ unsigned char runGame() {
 
 	//Move the snake
 	moveCounter++;
-	if(moveCounter > 10) {
+	if(moveCounter > speed) {
 		moveSnake();
 		moveCounter = 0;
 	}

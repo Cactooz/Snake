@@ -205,6 +205,8 @@ unsigned char runGame() {
 		moveSnake();
 		//Check if the snake ate the apple
 		appleEat();
+		//Display the points on the lamps
+		PORTE=(length-2);
 		//Check if the snake died
 		deathCheck();
 		//Reset the counter

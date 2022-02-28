@@ -199,18 +199,19 @@ unsigned char runGame() {
 	//Check if the snakeDirection have changed
 	snakeDirection();
 
-	//Move the snake
-	moveCounter++;
+	//Only update every once in a while
 	if(moveCounter > speed) {
+		//Move the snake
 		moveSnake();
+		//Check if the snake ate the apple
+		appleEat();
+		//Check if the snake died
+		deathCheck();
+		//Reset the counter
 		moveCounter = 0;
 	}
-
-	//Check if the snake ate the apple
-	appleEat();
-
-	//Check if the snake died
-	deathCheck();
+	else
+		moveCounter++;
 	
 	//Return the current state of the snake
 	return alive;

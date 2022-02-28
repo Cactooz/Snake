@@ -33,6 +33,8 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos);
 
 //Functions for the menu
 unsigned char runMenu();
+unsigned char chooseDifficulty();
+
 void initGame();
 unsigned char runGame();
 void drawGame();

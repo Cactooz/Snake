@@ -28,9 +28,9 @@ unsigned char podiumDesign[512] =
 
 int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
 {
-    {'P', 'B', 370},
-    {'M', 'H', 320},
-    {'W', 'H', 230},
+    //{'P', 'B', 370},
+    //{'M', 'H', 320},
+    //{'W', 'H', 230},
 };
 
 unsigned char displayHighscore()
@@ -134,21 +134,21 @@ unsigned char addHighscore(int score)
         i++;
     }
       
-    if(score > highscoreArray[0][2])
+    if(score >= highscoreArray[0][2])
     {
         highscoreArray[0][0] = first;
         highscoreArray[0][1] = second;
         highscoreArray[0][2] = score;
     }
 
-    else if(score > highscoreArray[1][2])
+    else if(score >= highscoreArray[1][2])
     {
         highscoreArray[1][0] = first;
         highscoreArray[1][1] = second;
         highscoreArray[1][2] = score;
     }
 
-    else if(score > highscoreArray[2][2])
+    else if(score >= highscoreArray[2][2])
     {
         highscoreArray[2][0] = first;
         highscoreArray[2][1] = second;

@@ -71,7 +71,7 @@ unsigned char runMenu()
                 select = 1;
             }
             if (getButtons() & 4)
-                return 2;
+                return 3;
             break;            
         }
         

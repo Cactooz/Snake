@@ -46,6 +46,9 @@ extern unsigned short length;
 //Variable for the speed of the snake
 extern unsigned char speed;
 
+//Variable for the speed of the snake
+extern unsigned char speed;
+
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);

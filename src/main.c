@@ -71,12 +71,13 @@ int main() {
 				break;
 			case game:
 				//Code for the game
-				//Run the game, if we get 1 back move to gameOver
-				if(runGame())
+				//Run the game, if we get 0 back move to gameOver
+				if(!runGame())
 					gameState = gameOver;
+				else	
+					//Draw the game and update the screen
+					drawGame();
 
-				//Draw the game and update the screen
-				drawGame();
 				OledUpdate();
 				break;
 			case gameOver:

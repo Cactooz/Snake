@@ -90,9 +90,8 @@ int main() {
 			default:
 				break;
 		}
-		
-		//Delay 500ms
-		delay(500);
+		//Delay 33ms
+		delay(33);
 	}
 
 	return 0;

@@ -35,8 +35,8 @@ unsigned char appleCount = 0;
 unsigned char appleX;
 unsigned char appleY;
 
-//Keep track if the snake is alive or not, 0 = alive, 1 = dead
-unsigned char alive = 0;
+//Keep track if the snake is alive or not, 1 = alive, 0 = dead
+unsigned char alive = 1;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {

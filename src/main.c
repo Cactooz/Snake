@@ -51,7 +51,6 @@ int main() {
     					clearDisplay();
 
 						//Change the gameState to game and init the game
-						speed = 10;
 						gameState = game;
 						initGame();
 						break;

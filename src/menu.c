@@ -58,6 +58,7 @@ unsigned char runMenu()
             }
             if (getButtons() & 4)
             {
+                    delay(3000);
                     chooseDifficulty();
                     return 1;
             }
@@ -110,6 +111,7 @@ void chooseDifficulty()
             {
                 speed = 10;
                 loop = 0;
+                PORTE = speed;
             }
             
             break;
@@ -128,6 +130,7 @@ void chooseDifficulty()
             {
                 speed = 3;
                 loop = 0;
+                PORTE = speed;
             }
             break;
         }

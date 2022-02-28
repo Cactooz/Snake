@@ -43,22 +43,30 @@ int main() {
 	while(1) {
 		switch(gameState) {
 			case menu:
+				clearDisplay();
 				switch(runMenu())
 				{
-					case 1:
+					case 1: //Easy
 						//Clears the screen
     					clearDisplay();
 
 						//Change the gameState to game and init the game
+						speed = 10;
 						gameState = game;
 						initGame();
 						break;
 					
-					case 2:
+					case 2: //Hard
 						//Clears the screen
     					clearDisplay();
-						gameState = highscore;
+						speed = 3;
+						gameState = game;
+						initGame();
 						break;
+
+					case 3: //Leaderboard
+						clearDisplay();
+						gameState = highscore;
 				}
 				break;
 			case game:
@@ -74,8 +82,10 @@ int main() {
 				break;
 			case gameOver:
 				//Code for game over menu
-				
-				printWord("GAME OVER", 9, 50, 12);
+				clearDisplay();
+				if(addHighscore(length-2))
+					gameState = menu;
+				OledUpdate();
 				break;
 			case highscore:
 				//Code for highscore menu

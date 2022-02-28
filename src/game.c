@@ -69,6 +69,17 @@ void drawGameBorder() {
 
 //Function to intilize the position of the snake
 void initGame() {
+	//Clear the snakePos array
+	unsigned char y;
+	unsigned char x;
+	//Loop through the full snakePos array
+	for(y = 0; y < 10; y++) {
+		for(x = 0; x < 42; x++) {
+			//Clear the pos value
+			snakePos[y][x] = 0;
+		}
+	}
+
 	//Turn on a 1 pixel border around the game area
 	drawGameBorder();
 
@@ -79,6 +90,11 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+
+	//Reset the data variables
+	appleCount = 0;
+	length = 2;
+	alive = 1;
 }
 
 //Place an apple on a random position on the screen

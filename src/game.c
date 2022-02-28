@@ -38,6 +38,9 @@ unsigned char appleY;
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
 
+//Variable for keeping track of the movement timings
+unsigned char moveCounter;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -95,6 +98,7 @@ void initGame() {
 	appleCount = 0;
 	length = 2;
 	alive = 1;
+	moveCounter = 100;
 }
 
 //Place an apple on a random position on the screen
@@ -193,7 +197,11 @@ unsigned char runGame() {
 	snakeDirection();
 
 	//Move the snake
-	moveSnake();
+	moveCounter++;
+	if(moveCounter > 10) {
+		moveSnake();
+		moveCounter = 0;
+	}
 
 	//Check if the snake ate the apple
 	appleEat();

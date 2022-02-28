@@ -21,10 +21,7 @@ unsigned char runMenu()
             OledUpdate();
             delay(10);
         }
-        //Turn off every pixel
-        for (column = 0; column < 128; column++)
-            for(row = 0; row < 32; row++)
-                updatePixel(column, row, 0);
+        clearDisplay();
 
         //Display text
         printWord("SNAKE", 5, 50, 0);
@@ -36,10 +33,7 @@ unsigned char runMenu()
 
          delay(3000);
 
-        //Turn off every pixel
-        for (column = 0; column < 128; column++)
-            for(row = 0; row < 32; row++)
-                updatePixel(column, row, 0);
+        clearDisplay();
 
         OledUpdate();
         runs = 0; //Makes sure the loadingscreen only runs once :P
@@ -93,9 +87,7 @@ unsigned char chooseDifficulty()
     int row;
     int column;
     //Turn off every pixel
-        for (column = 0; column < 128; column++)
-            for(row = 0; row < 32; row++)
-                updatePixel(column, row, 0);
+    clearDisplay();
     int select = 1;
     while (1)
     {

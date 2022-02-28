@@ -15,6 +15,7 @@ void quickDelay(int time);
 void OledPutBuffer(int cb, unsigned char* rgbTx);
 unsigned char Spi2PutByte (unsigned char bVal);
 void updatePixel(unsigned char x, unsigned char y, unsigned char state);
+void clearDisplay();
 
 //Buffer for the OLED display
 extern unsigned char displayBuffer[512];
@@ -22,11 +23,23 @@ extern unsigned char displayBuffer[512];
 //Prints out capital letters A-Z on display
 void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned char state);
 
+//Prints out digits 1 - 9 on display
+void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, unsigned char state);
+
 //Print word with length "length" at xPos,yPos
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos);
 
+//Print number with length "length" at xPos,yPos
+void printNumber(int number, unsigned char xPos, unsigned char yPos);
+
 //Functions for the menu
 unsigned char runMenu();
+unsigned char chooseDifficulty();
+
 void initGame();
 unsigned char runGame();
 void drawGame();
+
+//Functions for highscore
+unsigned char displayHighscore();
+unsigned char addHighscore(int score);

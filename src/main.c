@@ -31,11 +31,7 @@ int main() {
 	//Define the gameStates
 	enum gameState{menu, game, gameOver, highscore};
 	//Set the gameState to menu
-	enum gameState gameState = game;
-
-	//Used for clearing display
-	int column;
-	int row;
+	enum gameState gameState = menu;
 
 	//Run the game
 	while(1) {
@@ -45,9 +41,7 @@ int main() {
 				{
 					case 1:
 						//Clears the screen
-    					for (column = 0; column < 128; column++)
-        					for(row = 0; row < 32; row++)
-            					updatePixel(column, row, 0);
+    					clearDisplay();
 
 						//Change the gameState to game and init the game
 						gameState = game;
@@ -56,9 +50,7 @@ int main() {
 					
 					case 2:
 						//Clears the screen
-    					for (column = 0; column < 128; column++)
-        					for(row = 0; row < 32; row++)
-            					updatePixel(column, row, 0);
+    					clearDisplay();
 						gameState = highscore;
 						break;
 				}
@@ -80,8 +72,13 @@ int main() {
 				break;
 			case highscore:
 				//Code for highscore menu
-				printWord("HIGHSCORE", 9, 50, 12);
+				if(displayHighscore())
+				{
+					clearDisplay();
+					gameState = menu;
+				}
 				OledUpdate();
+
 				break;
 			default:
 				break;

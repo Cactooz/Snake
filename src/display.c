@@ -93,6 +93,22 @@ char font[27][30] =
   {0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,0,0}, //91 = SELECT
 };
 
+char numberFont[10][30] = 
+{
+  {1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1}, //Number 0
+  {0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,1,1,1,1}, //Number 1
+  {0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1}, //Number 2 
+  {1,1,1,1,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,0}, //Number 3
+  {1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1}, //Number 4 
+  {1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,0}, //Number 5 
+  {0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,1,1,1,0}, //Number 6 
+  {1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0}, //Number 7 
+  {1,1,1,1,1,1,0,0,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1}, //Number 8 
+  {1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1}, //Number 9 
+};
+
+
+
 void quickDelay(int time) {
 	int i;
 	for(i = time; i > 0; i--);
@@ -257,6 +273,18 @@ void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned 
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }
 
+//Prints out digits 1 - 9 on display
+void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, unsigned char state)
+{
+  int pixel;
+  if(state == 1)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), numberFont[digit][pixel]);
+  else if(state == 0)
+    for(pixel = 0; pixel < 30; pixel++)
+      updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
+}
+
 
 //Print word with length "length" at xPos,yPos
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos)
@@ -268,4 +296,36 @@ void printWord(char* word, unsigned char length, unsigned char xPos, unsigned ch
 				printCharacterAZ(*word, xPos+i, yPos, 1);
 			word += 1;
 		}
+}
+
+//Print word with length "length" at xPos,yPos
+void printNumber(int number, unsigned char xPos, unsigned char yPos)
+{
+    //Split number in to an array with length
+    unsigned char count = 1;
+    int tempNumber = number;
+    while(tempNumber/=10) //Counts number of digits in number
+      count++;
+    
+    unsigned char numberArray[count];
+		int i;
+    for(i = 0; i < count; i++) //Put every digit in array
+    {
+      numberArray[i] = number % 10;
+      number /= 10;
+    }
+
+    int j = 0;
+		for(i = 0; i < count*6; i += 6)
+    {
+				printDigit(numberArray[count - 1 - j], xPos+i, yPos, 1);
+        j++;
+    }
+}
+
+void clearDisplay()
+{
+  int i;
+  for(i = 0; i < 512; i++)
+    displayBuffer[i] = 0;
 }

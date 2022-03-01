@@ -34,4 +34,8 @@ unsigned char getButtonsPress() {
     delay(50);
 
     return newButtonState;
+
+//Get input from the 4 switches
+unsigned char getSwitches(void) {
+	return ((PORTD & 0x00000f00) >> 8);
 }

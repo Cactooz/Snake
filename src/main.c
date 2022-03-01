@@ -11,7 +11,7 @@ void init() {
 	//Set button 1 as input
 	TRISFSET = 0x00000002;
 
-	//Set button 2-4 as inputs
+	//Set button 2-4 as inputs and the switches
 	TRISDSET = 0x00000fe0;
 
 	//Setup for lamps

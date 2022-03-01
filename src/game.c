@@ -44,6 +44,13 @@ unsigned char alive;
 //Variable for keeping track of the movement timings
 unsigned char moveCounter;
 
+//AI variables
+//Keeping track of AI moving direction
+unsigned char aiDirection;
+//The position of the AI
+unsigned char aiX;
+unsigned char aiY;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head

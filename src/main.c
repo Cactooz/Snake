@@ -66,7 +66,7 @@ int main() {
 				{
 					case 1: //Play
 						//Clears the screen
-    					clearDisplay();
+						clearDisplay();
 
 						//Change the gameState to game and init the game
 						gameState = game;
@@ -75,7 +75,7 @@ int main() {
 					
 					case 2: //Leaderboard
 						//Clears the screen
-    					clearDisplay();
+						clearDisplay();
 						gameState = highscore;
 						break;
 				}

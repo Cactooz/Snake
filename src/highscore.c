@@ -122,16 +122,33 @@ unsigned char addHighscore(int score)
     }
 
      //Sortera array
-      
+
     if(score >= highscoreArray[0][2]) //First place 
     { 
+        //Move second place down to third
+        highscoreArray[2][0] = highscoreArray[1][0];
+        highscoreArray[2][1] = highscoreArray[1][1];
+        highscoreArray[2][2] = highscoreArray[1][2];
+
+        //Move first place down to second
+        highscoreArray[1][0] = highscoreArray[0][0];
+        highscoreArray[1][1] = highscoreArray[0][1];
+        highscoreArray[1][2] = highscoreArray[0][2];
+
+        //New first place
         highscoreArray[0][0] = first;
         highscoreArray[0][1] = second;
         highscoreArray[0][2] = score;
     }
 
-    else if(score >= highscoreArray[1][2])
+    else if(score >= highscoreArray[1][2]) //Second place
     {
+        //Move second place down to third
+        highscoreArray[2][0] = highscoreArray[1][0];
+        highscoreArray[2][1] = highscoreArray[1][1];
+        highscoreArray[2][2] = highscoreArray[1][2];
+        
+        //New second place
         highscoreArray[1][0] = first;
         highscoreArray[1][1] = second;
         highscoreArray[1][2] = score;

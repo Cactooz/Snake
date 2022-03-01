@@ -8,6 +8,9 @@ void *stdout = (void *) 0;
 
 //Function to initialize everything
 void init() {
+	//Set the seed for the random
+	srand(getSwitches());
+
 	//Set button 1 as input
 	TRISFSET = 0x00000002;
 

@@ -121,8 +121,6 @@ unsigned char addHighscore(int score)
             ch = 'A';
     }
 
-     //Sortera array
-
     if(score >= highscoreArray[0][2]) //First place 
     { 
         //Move second place down to third
@@ -147,7 +145,7 @@ unsigned char addHighscore(int score)
         highscoreArray[2][0] = highscoreArray[1][0];
         highscoreArray[2][1] = highscoreArray[1][1];
         highscoreArray[2][2] = highscoreArray[1][2];
-        
+
         //New second place
         highscoreArray[1][0] = first;
         highscoreArray[1][1] = second;

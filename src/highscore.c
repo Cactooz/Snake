@@ -40,19 +40,19 @@ unsigned char displayHighscore()
         displayBuffer[i] = podiumDesign[i];
 
     //First place
-    printCharacterAZ(highscoreArray[0][0], 45, 5, 1);
-    printCharacterAZ(highscoreArray[0][1], 51, 5, 1);
-    printNumber(highscoreArray[0][2], 60, 5);
+    printCharacterAZ(highscoreArray[0][0], 49, 5, 1);
+    printCharacterAZ(highscoreArray[0][1], 55, 5, 1);
+    printNumber(highscoreArray[0][2], 64, 5);
 
     //Second place
-    printCharacterAZ(highscoreArray[1][0], 5, 12, 1);
-    printCharacterAZ(highscoreArray[1][1], 11, 12, 1);
-    printNumber(highscoreArray[1][2], 20, 12);
+    printCharacterAZ(highscoreArray[1][0], 9, 12, 1);
+    printCharacterAZ(highscoreArray[1][1], 15, 12, 1);
+    printNumber(highscoreArray[1][2], 24, 12);
 
     //Third place
-    printCharacterAZ(highscoreArray[2][0], 90, 20, 1);
-    printCharacterAZ(highscoreArray[2][1], 96, 20, 1);
-    printNumber(highscoreArray[2][2], 105, 20);
+    printCharacterAZ(highscoreArray[2][0], 94, 20, 1);
+    printCharacterAZ(highscoreArray[2][1], 100, 20, 1);
+    printNumber(highscoreArray[2][2], 109, 20);
 
     while (1)
     {
@@ -121,29 +121,38 @@ unsigned char addHighscore(int score)
             ch = 'A';
     }
 
-    unsigned char i = 0;
-    while (highscoreArray[i][2])
-    {
-        if(i == 2)
-            break;
-        i++;
-    }
-      
-    if(score > highscoreArray[0][2])
-    {
+    if(score >= highscoreArray[0][2]) //First place 
+    { 
+        //Move second place down to third
+        highscoreArray[2][0] = highscoreArray[1][0];
+        highscoreArray[2][1] = highscoreArray[1][1];
+        highscoreArray[2][2] = highscoreArray[1][2];
+
+        //Move first place down to second
+        highscoreArray[1][0] = highscoreArray[0][0];
+        highscoreArray[1][1] = highscoreArray[0][1];
+        highscoreArray[1][2] = highscoreArray[0][2];
+
+        //New first place
         highscoreArray[0][0] = first;
         highscoreArray[0][1] = second;
         highscoreArray[0][2] = score;
     }
 
-    else if(score > highscoreArray[1][2])
+    else if(score >= highscoreArray[1][2]) //Second place
     {
+        //Move second place down to third
+        highscoreArray[2][0] = highscoreArray[1][0];
+        highscoreArray[2][1] = highscoreArray[1][1];
+        highscoreArray[2][2] = highscoreArray[1][2];
+
+        //New second place
         highscoreArray[1][0] = first;
         highscoreArray[1][1] = second;
         highscoreArray[1][2] = score;
     }
 
-    else if(score > highscoreArray[2][2])
+    else if(score >= highscoreArray[2][2])
     {
         highscoreArray[2][0] = first;
         highscoreArray[2][1] = second;
@@ -158,3 +167,4 @@ unsigned char addHighscore(int score)
     //Jämför med andra plats, else if
     //Jämför med tredje plats, else if 
 }
+

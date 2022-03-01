@@ -47,7 +47,8 @@ void drawGame();
 extern unsigned short length;
 //Variable for the speed of the snake
 extern unsigned char speed;
-
+//Variable for the amount of snakes
+extern unsigned char player;
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);

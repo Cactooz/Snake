@@ -205,6 +205,36 @@ void moveSnake() {
 	}
 }
 
+//Move the AI on the screen
+void moveAI() {
+	aiDirection = rand() % 4;
+	//Set the AI head to the new position
+	if(aiDirection == 0) {
+		if(aiX <= 0)
+			placeAiHead(aiX+1, aiY);
+		else
+			placeAiHead(aiX-1, aiY);
+	}
+	else if(aiDirection == 1) {
+		if(aiY <= 0)
+			placeAiHead(aiX, aiY+1);
+		else
+			placeAiHead(aiX, aiY-1);
+	}
+	else if(aiDirection == 2) {
+		if(aiY >= 9)
+			placeAiHead(aiX, aiY-1);
+		else
+			placeAiHead(aiX, aiY+1);		
+	}
+	else if(aiDirection == 3) {
+		if(aiX >= 41)
+			placeAiHead(aiX-1, aiY);
+		else
+			placeAiHead(aiX+1, aiY);				
+	}
+}
+
 //Check if the snake is outside of the screen and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9

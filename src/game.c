@@ -116,9 +116,17 @@ void initGame() {
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
 	direction = rand() % 4;
+	
+	//Set AI start position and moving direction
+	unsigned char startAiX = rand() % 40 + 1;
+	unsigned char startAiY = rand() % 8 + 1;
+	aiDirection = rand() % 4;
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+
+	//Put the starting position of the AI
+	placeAiHead(startAiX, startAiY);
 }
 
 //Place an apple on a random position on the screen

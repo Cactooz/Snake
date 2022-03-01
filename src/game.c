@@ -27,6 +27,8 @@ unsigned short length;
 //The speed of the snake
 unsigned char speed;
 
+unsigned char player;
+
 //The position of the snake
 unsigned char currentX;
 unsigned char currentY;

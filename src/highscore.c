@@ -121,29 +121,23 @@ unsigned char addHighscore(int score)
             ch = 'A';
     }
 
-    unsigned char i = 0;
-    while (highscoreArray[i][2])
-    {
-        if(i == 2)
-            break;
-        i++;
-    }
+     //Sortera array
       
-    if(score > highscoreArray[0][2])
-    {
+    if(score >= highscoreArray[0][2]) //First place 
+    { 
         highscoreArray[0][0] = first;
         highscoreArray[0][1] = second;
         highscoreArray[0][2] = score;
     }
 
-    else if(score > highscoreArray[1][2])
+    else if(score >= highscoreArray[1][2])
     {
         highscoreArray[1][0] = first;
         highscoreArray[1][1] = second;
         highscoreArray[1][2] = score;
     }
 
-    else if(score > highscoreArray[2][2])
+    else if(score >= highscoreArray[2][2])
     {
         highscoreArray[2][0] = first;
         highscoreArray[2][1] = second;
@@ -158,3 +152,4 @@ unsigned char addHighscore(int score)
     //Jämför med andra plats, else if
     //Jämför med tredje plats, else if 
 }
+

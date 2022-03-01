@@ -2,6 +2,7 @@
 #include <pic32mx.h>
 #include "game.h"
 
+int timecount = 0;
 //Declare stdout as NULL
 void *stdout = (void *) 0;
 
@@ -22,10 +23,27 @@ void init() {
 	//Setup display
 	OledHostInit();
 	OledDspInit();
+
+	//Initialize Timer2
+  	T2CONSET = 0x70; //0111 0000, Sets prescale to 1:256
+  	IFSCLR(0) = 0x100;//0001 0000 0000
+  	PR2 = 31250;
+  	TMR2 = 0;
+  	T2CONSET = 0x08000; // 1000 0000 0000 0000, Start timer
+
+  	IPCSET(2) = 0x1f; //0001 1111 - Bit 4:2 Priority, Bit 1:0 Subpriority.
+  	IECSET(0) = 0x100; // 0001 0000 0000 - Bit 8 enable interupts from Timer2
+
+	enable_interrupts();
+
+	IPCSET(2) = 0x1f; 
+  	IECSET(0) = 0x100;
 }
 
 //Called on interrupt
 void user_isr() {
+	OledUpdate();
+	IFSCLR(0) = 0x100;//0001 0000 0000
 	return;
 }
 
@@ -51,7 +69,6 @@ int main() {
     					clearDisplay();
 
 						//Change the gameState to game and init the game
-						speed = 10;
 						gameState = game;
 						initGame();
 						break;
@@ -71,15 +88,12 @@ int main() {
 				else	
 					//Draw the game and update the screen
 					drawGame();
-
-				OledUpdate();
 				break;
 			case gameOver:
 				//Code for game over menu
 				clearDisplay();
 				if(addHighscore(length-2))
 					gameState = menu;
-				OledUpdate();
 				break;
 			case highscore:
 				//Code for highscore menu
@@ -88,8 +102,6 @@ int main() {
 					clearDisplay();
 					gameState = menu;
 				}
-				OledUpdate();
-
 				break;
 			default:
 				break;

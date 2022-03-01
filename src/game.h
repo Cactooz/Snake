@@ -50,3 +50,6 @@ extern unsigned char speed;
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);
+
+
+unsigned char getButtonsPress();

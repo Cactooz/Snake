@@ -18,7 +18,6 @@ unsigned char runMenu()
             for(row = 0; row < 32; row++)
                 updatePixel(column, row, 1);
 
-            OledUpdate();
             delay(5);
         }
         clearDisplay();
@@ -29,13 +28,11 @@ unsigned char runMenu()
         printWord("PONTUS", 6, 20, 20);
         printWord("AND", 3, 60, 20);
         printWord("HUGO", 4, 83, 20);
-        OledUpdate();
 
-         delay(2000);
+        delay(2000);
 
         clearDisplay();
 
-        OledUpdate();
         runs = 0; //Makes sure the loadingscreen only runs once :P
     }
     
@@ -50,14 +47,15 @@ unsigned char runMenu()
             printCharacterAZ(91, 40, 8, 1); //Marker
             printWord("PLAY", 4, 50, 8);
             printWord("LEADERBOARD", 11, 30, 16);
-            if(getButtons() & 8) //Press BTN4 to scroll
+            if(getButtonsPress() & 8) //Press BTN4 to scroll
             {
                 printCharacterAZ(91, 40, 8, 0); //Remove Marker
-                delay(300);
+                delay(50);
                 select = 2;
             }
-            if (getButtons() & 4)
+            if (getButtonsPress() & 4)
             {
+                    delay(50);
                     chooseDifficulty();
                     return 1;
             }
@@ -67,17 +65,16 @@ unsigned char runMenu()
             printCharacterAZ(91, 20, 16, 1); //Marker
             printWord("PLAY", 4, 50, 8);
             printWord("LEADERBOARD", 11, 30, 16);
-            if(getButtons() & 8) //Press BTN4 to scroll
+            if(getButtonsPress() & 8) //Press BTN4 to scroll
             {
                 printCharacterAZ(91, 20, 16, 0); //Remove Marker
-                delay(300);
+                delay(50);
                 select = 1;
             }
-            if (getButtons() & 4)
+            if (getButtonsPress() & 4)
                 return 2;
             break;            
         }
-        OledUpdate();
     }
     
 
@@ -100,16 +97,17 @@ void chooseDifficulty()
             printCharacterAZ(91, 40, 8, 1); //Marker
             printWord("EASY", 4, 50, 8);
             printWord("HARD", 4, 50, 16);
-            if(getButtons() & 8) //Press BTN4 to scroll
+            if(getButtonsPress() & 8) //Press BTN4 to scroll
             {
                 printCharacterAZ(91, 40, 8, 0); //Remove Marker
-                delay(300);
+                delay(50);
                 select = 2;
             }
-            if (getButtons() & 4)
+            if (getButtonsPress() & 4)
             {
                 speed = 10;
                 loop = 0;
+                PORTE = speed;
             }
             
             break;
@@ -118,21 +116,21 @@ void chooseDifficulty()
             printCharacterAZ(91, 40, 16, 1); //Marker
             printWord("EASY", 4, 50, 8);
             printWord("HARD", 4, 50, 16);
-            if(getButtons() & 8) //Press BTN4 to scroll
+            if(getButtonsPress() & 8) //Press BTN4 to scroll
             {
                 printCharacterAZ(91, 40, 16, 0); //Remove Marker
-                delay(300);
+                delay(50);
                 select = 1;
             }
-            if (getButtons() & 4)
+            if (getButtonsPress() & 4)
             {
                 speed = 3;
                 loop = 0;
+                PORTE = speed;
             }
             break;
         }
-        
-        OledUpdate();
+
     }
 
 }

@@ -54,10 +54,9 @@ unsigned char displayHighscore()
     printCharacterAZ(highscoreArray[2][1], 96, 20, 1);
     printNumber(highscoreArray[2][2], 105, 20);
 
-    OledUpdate();
     while (1)
     {
-        if(getButtons() & 8)
+        if(getButtonsPress() & 8)
         {
             int column;
             int row;
@@ -80,10 +79,8 @@ unsigned char addHighscore(int score)
     unsigned char x = 1;
     while (x == 1) //Choose first character
     {
-        unsigned char buttonState = getButtons();
         printCharacterAZ(ch, 55, 16, 1);
-        OledUpdate();
-        if (buttonState & 8) //BTN4 Change character
+        if (getButtonsPress() & 0x8) //BTN4 Change character
         {
             printCharacterAZ(ch,55,16,0);
             ch++;
@@ -93,7 +90,7 @@ unsigned char addHighscore(int score)
         if(ch == 'Z' + 1) //Jump to beginning
             ch = 'A';
 
-        if(buttonState & 4) //BTN3 Select character
+        if(getButtonsPress() & 0x4) //BTN3 Select character
         {
             first = ch;
             x = 2;
@@ -105,17 +102,15 @@ unsigned char addHighscore(int score)
 
     while (x == 2) //Choose second character
     {
-        unsigned char buttonState = getButtons();
         printCharacterAZ(ch, 63, 16, 1);
-        OledUpdate();
-        if (buttonState & 8) //BTN4 Change character
+        if (getButtonsPress() & 0x8) //BTN4 Change character
         {
             printCharacterAZ(ch,63,16,0);
             ch++;
             delay(300);
         }
 
-        if(buttonState & 4) //BTN3 Select character
+        if(getButtonsPress() & 0x4) //BTN3 Select character
         {
             second = ch;
             x = 3;

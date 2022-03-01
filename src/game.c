@@ -61,6 +61,16 @@ void placeHead(unsigned char x, unsigned char y) {
 	currentY = y;
 }
 
+//Place the AI head in the snakePos array
+void placeAiHead(unsigned char x, unsigned char y) {
+	//Set the position of the snake head
+	snakePos[y][x] = 4;
+
+	//Set the current position for the snake head
+	aiX = x;
+	aiY = y;
+}
+
 void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row

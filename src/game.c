@@ -95,6 +95,9 @@ void initGame() {
 	alive = 1;
 	moveCounter = 100;
 
+	//Set the seed for the random
+	srand(getSwitches());
+
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;

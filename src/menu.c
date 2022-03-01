@@ -5,6 +5,60 @@
 
 int runs = 1;
 
+void choosePlayerMode()
+{
+	int row;
+	int column;
+	//Turn off every pixel
+	clearDisplay();
+	int select = 1;
+	unsigned char loop = 1;
+	while (loop)
+	{
+		switch (select)
+		{
+		case 1: //-30
+			printCharacterAZ(91, 25, 8, 1); //Marker
+			printWord("ONEPLAYER", 9, 35, 8);
+			printWord("TWOPLAYER", 9, 35, 16);
+			if(getButtonsPress() & 8) //Press BTN4 to scroll
+			{
+				printCharacterAZ(91, 25, 8, 0); //Remove Marker
+				delay(50);
+				select = 2;
+			}
+			if (getButtonsPress() & 4)
+			{
+				player = 1;
+				chooseDifficulty();
+				loop = 0;
+			}
+			
+			break;
+		
+		case 2:
+			printCharacterAZ(91, 25, 16, 1); //Marker
+			printWord("ONEPLAYER", 9, 35, 8);
+			printWord("TWOPLAYER", 9, 35, 16);
+			if(getButtonsPress() & 8) //Press BTN4 to scroll
+			{
+				printCharacterAZ(91, 25, 16, 0); //Remove Marker
+				delay(50);
+				select = 1;
+			}
+			if (getButtonsPress() & 4)
+			{
+				player = 2;
+				chooseDifficulty();
+				loop = 0;
+			}
+			break;
+		}
+
+	}
+
+}
+
 unsigned char runMenu()
 {
 	int column;
@@ -133,56 +187,3 @@ void chooseDifficulty()
 
 }
 
-void choosePlayerMode()
-{
-	int row;
-	int column;
-	//Turn off every pixel
-	clearDisplay();
-	int select = 1;
-	unsigned char loop = 1;
-	while (loop)
-	{
-		switch (select)
-		{
-		case 1: //-30
-			printCharacterAZ(91, 25, 8, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
-			if(getButtonsPress() & 8) //Press BTN4 to scroll
-			{
-				printCharacterAZ(91, 25, 8, 0); //Remove Marker
-				delay(50);
-				select = 2;
-			}
-			if (getButtonsPress() & 4)
-			{
-				player = 1;
-				chooseDifficulty();
-				loop = 0;
-			}
-			
-			break;
-		
-		case 2:
-			printCharacterAZ(91, 25, 16, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
-			if(getButtonsPress() & 8) //Press BTN4 to scroll
-			{
-				printCharacterAZ(91, 25, 16, 0); //Remove Marker
-				delay(50);
-				select = 1;
-			}
-			if (getButtonsPress() & 4)
-			{
-				player = 2;
-				chooseDifficulty();
-				loop = 0;
-			}
-			break;
-		}
-
-	}
-
-}

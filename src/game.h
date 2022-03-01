@@ -1,5 +1,6 @@
 //Functions for inputs
 unsigned char getButtons();
+unsigned char getSwitches();
 
 //Enable interrupts with MIPS
 void enable_interrupts();

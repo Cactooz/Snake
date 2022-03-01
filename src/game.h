@@ -1,5 +1,6 @@
 //Functions for inputs
 unsigned char getButtons();
+unsigned char getButtonsPress();
 unsigned char getSwitches();
 
 //Enable interrupts with MIPS
@@ -50,6 +51,3 @@ extern unsigned char speed;
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);
-
-
-unsigned char getButtonsPress();

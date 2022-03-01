@@ -25,9 +25,7 @@ unsigned char getButtonsPress() {
     if(newButtonState & 0x1 == oldButtonState & 0x1) {
         newButtonState &= 0xe;
     }
-
-    PORTE = newButtonState | (oldButtonState << 4);
-
+	
     //Save the output to the oldState for next time
     oldButtonState = newButtonState;
 

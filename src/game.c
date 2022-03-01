@@ -46,6 +46,13 @@ unsigned char alive;
 //Variable for keeping track of the movement timings
 unsigned char moveCounter;
 
+//AI variables
+//Keeping track of AI moving direction
+unsigned char aiDirection;
+//The position of the AI
+unsigned char aiX;
+unsigned char aiY;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -54,6 +61,16 @@ void placeHead(unsigned char x, unsigned char y) {
 	//Set the current position for the snake head
 	currentX = x;
 	currentY = y;
+}
+
+//Place the AI head in the snakePos array
+void placeAiHead(unsigned char x, unsigned char y) {
+	//Set the position of the snake head
+	snakePos[y][x] = 4;
+
+	//Set the current position for the snake head
+	aiX = x;
+	aiY = y;
 }
 
 void drawGameBorder() {
@@ -97,16 +114,21 @@ void initGame() {
 	alive = 1;
 	moveCounter = 100;
 
-	//Set the seed for the random
-	srand(getSwitches());
-
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
 	direction = rand() % 4;
+	
+	//Set AI start position and moving direction
+	unsigned char startAiX = rand() % 40 + 1;
+	unsigned char startAiY = rand() % 8 + 1;
+	aiDirection = rand() % 4;
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
+
+	//Put the starting position of the AI
+	placeAiHead(startAiX, startAiY);
 }
 
 //Place an apple on a random position on the screen
@@ -185,6 +207,36 @@ void moveSnake() {
 	}
 }
 
+//Move the AI on the screen
+void moveAI() {
+	aiDirection = rand() % 4;
+	//Set the AI head to the new position
+	if(aiDirection == 0) {
+		if(aiX <= 0)
+			placeAiHead(aiX+1, aiY);
+		else
+			placeAiHead(aiX-1, aiY);
+	}
+	else if(aiDirection == 1) {
+		if(aiY <= 0)
+			placeAiHead(aiX, aiY+1);
+		else
+			placeAiHead(aiX, aiY-1);
+	}
+	else if(aiDirection == 2) {
+		if(aiY >= 9)
+			placeAiHead(aiX, aiY-1);
+		else
+			placeAiHead(aiX, aiY+1);		
+	}
+	else if(aiDirection == 3) {
+		if(aiX >= 41)
+			placeAiHead(aiX-1, aiY);
+		else
+			placeAiHead(aiX+1, aiY);				
+	}
+}
+
 //Check if the snake is outside of the screen and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9
@@ -210,11 +262,14 @@ unsigned char runGame() {
 		deathCheck();
 		//Move the snake
 		if(alive) {
+			//Move the snake
 			moveSnake();
 			//Check if the snake ate the apple
 			appleEat();
 			//Display the points on the lamps
 			PORTE=(length-2);
+			//Move the AI
+			moveAI();
 		}
 		//Reset the counter
 		moveCounter = 0;

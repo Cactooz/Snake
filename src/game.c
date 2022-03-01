@@ -89,6 +89,12 @@ void initGame() {
 	//Turn on a 1 pixel border around the game area
 	drawGameBorder();
 
+	//Reset the data variables
+	appleCount = 0;
+	length = 2;
+	alive = 1;
+	moveCounter = 100;
+
 	//Get a random start position and moving direction
 	unsigned char startX = rand() % 21 + 10;
 	unsigned char startY = rand() % 5 + 3;
@@ -96,12 +102,6 @@ void initGame() {
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
-
-	//Reset the data variables
-	appleCount = 0;
-	length = 2;
-	alive = 1;
-	moveCounter = 100;
 }
 
 //Place an apple on a random position on the screen
@@ -182,9 +182,12 @@ void moveSnake() {
 
 //Check if the snake is outside of the screen and kill it
 void deathCheck() {
-	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9) {
+	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9
+		|| (direction == 0 && snakePos[currentY][currentX - 1])
+		|| (direction == 1 && snakePos[currentY - 1][currentX])
+		|| (direction == 2 && snakePos[currentY + 1][currentX])
+		|| (direction == 3 && snakePos[currentY][currentX + 1]))
 		alive = 0;
-	}
 }
 
 //Main function for running the game, returns 1 when game over
@@ -198,14 +201,14 @@ unsigned char runGame() {
 
 	//Only update every once in a while
 	if(moveCounter > speed) {
+		//Check if the snake died
+		deathCheck();
 		//Move the snake
 		moveSnake();
 		//Check if the snake ate the apple
 		appleEat();
 		//Display the points on the lamps
 		PORTE=(length-2);
-		//Check if the snake died
-		deathCheck();
 		//Reset the counter
 		moveCounter = 0;
 	}

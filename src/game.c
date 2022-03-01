@@ -207,11 +207,13 @@ unsigned char runGame() {
 		//Check if the snake died
 		deathCheck();
 		//Move the snake
-		moveSnake();
-		//Check if the snake ate the apple
-		appleEat();
-		//Display the points on the lamps
-		PORTE=(length-2);
+		if(alive) {
+			moveSnake();
+			//Check if the snake ate the apple
+			appleEat();
+			//Display the points on the lamps
+			PORTE=(length-2);
+		}
 		//Reset the counter
 		moveCounter = 0;
 	}
@@ -221,7 +223,6 @@ unsigned char runGame() {
 	//Return the current state of the snake
 	return alive;
 }
-
 
 //Draw a 3x3 block for the snake
 void drawBlock(unsigned char x, unsigned char y, unsigned char state) {

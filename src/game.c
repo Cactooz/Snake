@@ -48,7 +48,7 @@ unsigned char aiDirection;
 unsigned char aiX;
 unsigned char aiY;
 //The length of the AI
-unsigned char aiLength;
+unsigned short aiLength;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
@@ -156,6 +156,15 @@ void appleEat() {
 	}
 }
 
+void aiAppleEat() {
+	if(aiX == appleX && aiY == appleY) {
+		//Remove the apple
+		appleCount--;
+		//Increase the length of the snake
+		aiLength++;
+	}
+}
+
 //Change the snakeDirection depending on the button presses
 void snakeDirection() {
 	//Get the current pressed buttons
@@ -260,6 +269,8 @@ unsigned char runGame() {
 			if(player == 2) {
 				//Move the AI
 				moveAI();
+				//Check if the AI ate the apple
+				aiAppleEat();
 			}
 		}
 		//Reset the counter

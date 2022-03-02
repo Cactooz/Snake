@@ -19,8 +19,8 @@ void choosePlayerMode()
 		{
 		case 1: //-30
 			printCharacterAZ(91, 25, 8, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
+			printWord("ONE PLAYER", 10, 35, 8);
+			printWord("TWO PLAYER", 10, 35, 16);
 			if(getButtonsPress() & 8) //Press BTN4 to scroll
 			{
 				printCharacterAZ(91, 25, 8, 0); //Remove Marker
@@ -38,8 +38,8 @@ void choosePlayerMode()
 		
 		case 2:
 			printCharacterAZ(91, 25, 16, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
+			printWord("ONE PLAYER", 10, 35, 8);
+			printWord("TWO PLAYER", 10, 35, 16);
 			if(getButtonsPress() & 8) //Press BTN4 to scroll
 			{
 				printCharacterAZ(91, 25, 16, 0); //Remove Marker

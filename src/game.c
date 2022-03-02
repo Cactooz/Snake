@@ -4,18 +4,7 @@
 #include "game.h"
 
 //Array for all the posible snake positions and storing the data of the tail
-unsigned short snakePos[10][42] = {
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-};
+unsigned short snakePos[30][126];
 
 //The moving direction of the snake
 //0=left, 1=up, 2=down, 3=right
@@ -98,8 +87,8 @@ void initGame() {
 	unsigned char y;
 	unsigned char x;
 	//Loop through the full snakePos array
-	for(y = 0; y < 10; y++) {
-		for(x = 0; x < 42; x++) {
+	for(y = 0; y < 30; y++) {
+		for(x = 0; x < 126; x++) {
 			//Clear the pos value
 			snakePos[y][x] = 0;
 		}
@@ -136,8 +125,8 @@ void initGame() {
 
 //Place an apple on a random position on the screen
 void placeApple() {
-	unsigned char x = rand() % 42;
-	unsigned char y = rand() % 10;
+	unsigned char x = rand() % 126;
+	unsigned char y = rand() % 30;
 
 	//Place an apple if the snake isn't there
 	if(!snakePos[y][x]) {
@@ -186,8 +175,8 @@ void moveSnake() {
 	unsigned char i;
 	unsigned char j;
 	//Loop through all the snakePositions
-	for(i = 0; i < 10; i++) {
-		for(j = 0; j < 42; j++) {
+	for(i = 0; i < 30; i++) {
+		for(j = 0; j < 126; j++) {
 			//Remove one from each used snake position
 			if(snakePos[i][j] != 0) {
 				snakePos[i][j]--;
@@ -227,13 +216,13 @@ void moveAI() {
 			placeAiHead(aiX, aiY-1);
 	}
 	else if(aiDirection == 2) {
-		if(aiY >= 9)
+		if(aiY >= 30)
 			placeAiHead(aiX, aiY-1);
 		else
 			placeAiHead(aiX, aiY+1);		
 	}
 	else if(aiDirection == 3) {
-		if(aiX >= 41)
+		if(aiX >= 126)
 			placeAiHead(aiX-1, aiY);
 		else
 			placeAiHead(aiX+1, aiY);				
@@ -242,7 +231,7 @@ void moveAI() {
 
 //Check if the snake is outside of the screen and kill it
 void deathCheck() {
-	if(currentX < 0 || currentX > 41 || currentY < 0 || currentY > 9
+	if(currentX < 0 || currentX > 126 || currentY < 0 || currentY > 30
 		|| (direction == 0 && snakePos[currentY][currentX - 1])
 		|| (direction == 1 && snakePos[currentY - 1][currentX])
 		|| (direction == 2 && snakePos[currentY + 1][currentX])
@@ -311,20 +300,22 @@ void drawSnake() {
 	unsigned char y;
 	unsigned char x;
 	//Loop through the full snakePos array
-	for(y = 0; y < 10; y++) {
-		for(x = 0; x < 42; x++) {
+	for(y = 0; y < 30; y++) {
+		for(x = 0; x < 126; x++) {
 			//Turn on the pixel if there is a value in the array, else turn it off
 			if(snakePos[y][x] != 0)
-				drawBlock(x, y, 1);
+				//drawBlock(x, y, 1);
+				updatePixel(x+1,y+1, 1);
 			else
-				drawBlock(x, y, 0);
+				//drawBlock(x, y, 0);
+				updatePixel(x+1,y+1, 0);
 		}
 	}
 }
 
 void drawApple() {
 	//Add the apple to the screen buffer
-	updatePixel((appleX*3) + 2,(appleY*3) + 2,1);
+	updatePixel(appleX + 1, appleY + 1, 1);
 }
 
 //Main function for drawing everything in the game

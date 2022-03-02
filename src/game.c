@@ -51,6 +51,20 @@ unsigned char aiY;
 //The length of the AI
 unsigned short aiLength;
 
+//Obstacle 1 variables
+//Keeping track of the obstacle1 moving direction
+unsigned char obstacle1Direction;
+//The position of the obstacle1
+unsigned char obstacle1X;
+unsigned char obstacle1Y;
+
+//Obstacle 2 variables
+//Keeping track of the obstacle1 moving direction
+unsigned char obstacle2Direction;
+//The position of the obstacle1
+unsigned char obstacle2X;
+unsigned char obstacle2Y;
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head

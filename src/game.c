@@ -110,15 +110,15 @@ void initGame() {
 	moveCounter = 100;
 
 	//Get a random start position and moving direction
-	unsigned char startX = rand() % 21 + 10;
-	unsigned char startY = rand() % 5 + 3;
+	unsigned char startX = rand() % (WIDTH/2) + (WIDTH/4);
+	unsigned char startY = rand() % (HEIGHT/2) + (HEIGHT/4);
 	direction = rand() % 4;
 	
 	//Only add the AI in two player mode
 	if(player == 2) {
-		//Set AI start position and moving direction
-		unsigned char startAiX = rand() % 40 + 1;
-		unsigned char startAiY = rand() % 8 + 1;
+		//Set AI start position, moving direction and length
+		unsigned char startAiX = rand() % WIDTH;
+		unsigned char startAiY = rand() % HEIGHT;
 		aiDirection = rand() % 4;
 		
 		//Put the starting position of the AI

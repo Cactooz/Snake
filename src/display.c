@@ -293,8 +293,12 @@ void printWord(char* word, unsigned char length, unsigned char xPos, unsigned ch
 		int i;
 		for(i = 0; i < length*6; i += 6)
 		{	
-			if(*word)
-				printCharacterAZ(*word, xPos+i, yPos, 1);
+			if(*word){
+        if(*word == 0x20) //Space
+          printCharacterAZ(92, xPos+i, yPos, 1);
+        else
+				  printCharacterAZ(*word, xPos+i, yPos, 1);
+        }
 			word += 1;
 		}
 }

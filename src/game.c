@@ -116,8 +116,8 @@ void initGame() {
 	unsigned char startY = rand() % (HEIGHT/2) + (HEIGHT/4);
 	direction = rand() % 4;
 	
-	//Only add the AI in two player mode
-	if(player == 2) {
+	//Only add the AI in one player mode and hard mode
+	if(player == 1 && hardMode) {
 		//Set AI start position, moving direction and length
 		unsigned char startAiX = rand() % WIDTH;
 		unsigned char startAiY = rand() % HEIGHT;
@@ -265,8 +265,8 @@ unsigned char runGame() {
 			//Display the points on the lamps
 			PORTE=(length-START_LENGTH);
 
-			//Only update the AI in two player mode
-			if(player == 2) {
+			//Only update the AI in one player mode and hard mode
+			if(player == 1 && hardMode) {
 				//Move the AI
 				moveAI();
 				//Check if the AI ate the apple

@@ -283,24 +283,6 @@ unsigned char runGame() {
 	return alive;
 }
 
-//Draw a 3x3 block for the snake
-void drawBlock(unsigned char x, unsigned char y, unsigned char state) {
-	//Multiply in input coords by 3
-	x = x*3;
-	y = y*3;
-
-	//Update the pixels
-	updatePixel(x+1, y+1, state);
-	updatePixel(x+1, y+2, state);
-	updatePixel(x+1, y+3, state);
-	updatePixel(x+2, y+1, state);
-	updatePixel(x+2, y+2, state);
-	updatePixel(x+2, y+3, state);
-	updatePixel(x+3, y+1, state);
-	updatePixel(x+3, y+2, state);
-	updatePixel(x+3, y+3, state);
-}
-
 //Draw the snake on the screen
 void drawSnake() {
 	unsigned char y;
@@ -310,10 +292,8 @@ void drawSnake() {
 		for(x = 0; x < WIDTH; x++) {
 			//Turn on the pixel if there is a value in the array, else turn it off
 			if(snakePos[y][x] != 0)
-				//drawBlock(x, y, 1);
 				updatePixel(x+1,y+1, 1);
 			else
-				//drawBlock(x, y, 0);
 				updatePixel(x+1,y+1, 0);
 		}
 	}

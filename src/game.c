@@ -47,6 +47,8 @@ unsigned char aiDirection;
 //The position of the AI
 unsigned char aiX;
 unsigned char aiY;
+//The length of the AI
+unsigned char aiLength;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
@@ -61,7 +63,7 @@ void placeHead(unsigned char x, unsigned char y) {
 //Place the AI head in the snakePos array
 void placeAiHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
-	snakePos[y][x] = 4;
+	snakePos[y][x] = aiLength;
 
 	//Set the current position for the snake head
 	aiX = x;
@@ -120,6 +122,7 @@ void initGame() {
 		unsigned char startAiX = rand() % WIDTH;
 		unsigned char startAiY = rand() % HEIGHT;
 		aiDirection = rand() % 4;
+		aiLength = 5;
 		
 		//Put the starting position of the AI
 		placeAiHead(startAiX, startAiY);

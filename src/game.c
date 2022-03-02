@@ -131,16 +131,28 @@ void initGame() {
 	unsigned char startY = rand() % (HEIGHT/2) + (HEIGHT/4);
 	direction = rand() % 4;
 	
-	//Only add the AI in one player mode and hard mode
-	if(player == 1 && hardMode) {
-		//Set AI start position, moving direction and length
-		unsigned char startAiX = rand() % WIDTH;
-		unsigned char startAiY = rand() % HEIGHT;
-		aiDirection = rand() % 4;
-		aiLength = 5;
-		
-		//Put the starting position of the AI
-		placeAiHead(startAiX, startAiY);
+	if(hardMode) {
+		//Only add the obstacle in hardmode
+		//Setup obstacle1
+		obstacle1X = 3;
+		obstacle1Y = 3;
+		obstacle1Direction = rand() % 4;
+		//Setup obstacle2
+		obstacle2X = 118;
+		obstacle2Y = 22;
+		obstacle2Direction = rand() % 4;
+
+		if(player == 1) {
+			//Only add the AI in one player mode and hard mode
+			//Set AI start position, moving direction and length
+			unsigned char startAiX = rand() % WIDTH;
+			unsigned char startAiY = rand() % HEIGHT;
+			aiDirection = rand() % 4;
+			aiLength = 5;
+			
+			//Put the starting position of the AI
+			placeAiHead(startAiX, startAiY);
+		}
 	}
 
 	//Put the starting position of the head

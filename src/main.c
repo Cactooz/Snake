@@ -95,7 +95,7 @@ int main() {
 			case gameOver:
 				//Code for game over menu
 				clearDisplay();
-				if(addHighscore(length-2))
+				if(addHighscore(length-START_LENGTH))
 					gameState = menu;
 				break;
 			case highscore:

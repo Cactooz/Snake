@@ -45,6 +45,8 @@ void drawGame();
 
 //Variable for the length of the snake
 extern unsigned short length;
+//Constant for the start length of the snake 
+#define START_LENGTH 5
 //Variable for the speed of the snake
 extern unsigned char speed;
 //Variable for the amount of snakes

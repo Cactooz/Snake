@@ -19,9 +19,10 @@ unsigned char direction;
 //The length of the snake
 unsigned short length;
 
-//Variable keeping track if the game is in hardMode
+//Keeping track if the game is in hardMode
 unsigned char hardMode;
 
+//Keeping track of the amount of players
 unsigned char player;
 
 //The position of the snake
@@ -38,7 +39,7 @@ unsigned char appleY;
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
 
-//Variable for keeping track of the movement timings
+//Keeping track of the movement timings
 unsigned char moveCounter;
 
 //AI variables

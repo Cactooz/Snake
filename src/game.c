@@ -19,8 +19,8 @@ unsigned char direction;
 //The length of the snake
 unsigned short length;
 
-//The speed of the snake
-unsigned char speed;
+//Variable keeping track if the game is in hardMode
+unsigned char hardMode;
 
 unsigned char player;
 
@@ -253,7 +253,7 @@ unsigned char runGame() {
 	snakeDirection();
 
 	//Only update every once in a while
-	if(moveCounter > speed) {
+	if(moveCounter > 2) {
 		//Check if the snake died
 		deathCheck();
 		//Move the snake

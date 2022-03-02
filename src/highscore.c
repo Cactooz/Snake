@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "game.h"
 
-unsigned char podiumDesign[512] = 
+unsigned char podiumDesign[512] = //The screenArray to display the podium
 { 
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -28,7 +28,8 @@ unsigned char podiumDesign[512] =
 
 int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
 {
-    {92, 92, 0},
+    //Score is zero and initials are blank from start
+    {92, 92, 0}, 
     {92, 92, 0},
     {92, 92, 0},
 };
@@ -36,7 +37,7 @@ int highscoreArray[3][3]  = //Initial 1, Initial 2, Score
 unsigned char displayHighscore()
 {   
     int i;
-    for(i = 0; i<512; i++)
+    for(i = 0; i<512; i++) //Draw the podium design on display
         displayBuffer[i] = podiumDesign[i];
 
     //First place
@@ -56,18 +57,16 @@ unsigned char displayHighscore()
 
     while (1)
     {
-        if(getButtonsPress() & 8)
+        if(getButtonsPress() & 8) //BTN4 to exit
         {
-            int column;
-            int row;
             clearDisplay();
-            return 1;
+            return 1; //Return 1 to exit to menu
         }
         delay(100);
     }
 }
 
-//void addHighscore(), lägger till ett highscore i arrayen
+//Adds a highscore to the array if the score places top 3
 unsigned char addHighscore(int score)
 {
     char first;
@@ -154,17 +153,11 @@ unsigned char addHighscore(int score)
 
     else if(score >= highscoreArray[2][2])
     {
+        //New third place
         highscoreArray[2][0] = first;
         highscoreArray[2][1] = second;
         highscoreArray[2][2] = score;
     }
     return 1;
-
-    
-    //Name select här 
-    //Kollar om det finns en tom plats i arrayen med while loop
-    //Jämför med första plats, if
-    //Jämför med andra plats, else if
-    //Jämför med tredje plats, else if 
 }
 

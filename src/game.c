@@ -54,7 +54,13 @@ unsigned short aiLength;
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
-	snakePos[y][x] = length;
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			snakePos[y+i][x+j] = length;
+		}
+	}
 
 	//Set the current position for the snake head
 	currentX = x;

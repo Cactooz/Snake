@@ -210,31 +210,17 @@ void moveSnake() {
 
 //Move the AI on the screen
 void moveAI() {
-	aiDirection = rand() % 4;
-	//Set the AI head to the new position
-	if(aiDirection == 0) {
-		if(aiX <= 0)
-			placeAiHead(aiX+1, aiY);
-		else
-			placeAiHead(aiX-1, aiY);
+	if(aiX < appleX && aiX >= 0) {
+		placeAiHead(aiX+1, aiY);
 	}
-	else if(aiDirection == 1) {
-		if(aiY <= 0)
-			placeAiHead(aiX, aiY+1);
-		else
-			placeAiHead(aiX, aiY-1);
+	else if(aiX > appleX && aiX <= WIDTH) {
+		placeAiHead(aiX-1, aiY);
 	}
-	else if(aiDirection == 2) {
-		if(aiY >= HEIGHT)
-			placeAiHead(aiX, aiY-1);
-		else
-			placeAiHead(aiX, aiY+1);		
+	else if(aiY < appleY && aiY >= 0) {
+		placeAiHead(aiX, aiY+1);
 	}
-	else if(aiDirection == 3) {
-		if(aiX >= WIDTH)
-			placeAiHead(aiX-1, aiY);
-		else
-			placeAiHead(aiX+1, aiY);				
+	else if(aiY > appleY && aiY <= HEIGHT) {
+		placeAiHead(aiX, aiY-1);
 	}
 }
 

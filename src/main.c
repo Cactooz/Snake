@@ -2,7 +2,6 @@
 #include <pic32mx.h>
 #include "game.h"
 
-int timecount = 0;
 //Declare stdout as NULL
 void *stdout = (void *) 0;
 

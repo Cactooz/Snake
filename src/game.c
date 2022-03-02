@@ -105,7 +105,7 @@ void initGame() {
 
 	//Reset the data variables
 	appleCount = 0;
-	length = 2;
+	length = START_LENGTH;
 	alive = 1;
 	moveCounter = 100;
 
@@ -265,7 +265,7 @@ unsigned char runGame() {
 			//Check if the snake ate the apple
 			appleEat();
 			//Display the points on the lamps
-			PORTE=(length-2);
+			PORTE=(length-START_LENGTH);
 
 			//Only update the AI in two player mode
 			if(player == 2) {

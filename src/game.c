@@ -119,16 +119,19 @@ void initGame() {
 	unsigned char startY = rand() % 5 + 3;
 	direction = rand() % 4;
 	
-	//Set AI start position and moving direction
-	unsigned char startAiX = rand() % 40 + 1;
-	unsigned char startAiY = rand() % 8 + 1;
-	aiDirection = rand() % 4;
+	//Only add the AI in two player mode
+	if(player == 2) {
+		//Set AI start position and moving direction
+		unsigned char startAiX = rand() % 40 + 1;
+		unsigned char startAiY = rand() % 8 + 1;
+		aiDirection = rand() % 4;
+		
+		//Put the starting position of the AI
+		placeAiHead(startAiX, startAiY);
+	}
 
 	//Put the starting position of the head
 	placeHead(startX, startY);
-
-	//Put the starting position of the AI
-	placeAiHead(startAiX, startAiY);
 }
 
 //Place an apple on a random position on the screen
@@ -268,8 +271,12 @@ unsigned char runGame() {
 			appleEat();
 			//Display the points on the lamps
 			PORTE=(length-2);
-			//Move the AI
-			moveAI();
+
+			//Only update the AI in two player mode
+			if(player == 2) {
+				//Move the AI
+				moveAI();
+			}
 		}
 		//Reset the counter
 		moveCounter = 0;

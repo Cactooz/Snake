@@ -365,6 +365,35 @@ void moveSnake() {
 	}
 }
 
+//Function for moving the 2nd snake around on the screen
+void moveSnake2() {	
+	unsigned char i;
+	unsigned char j;
+	//Loop through all the snakePositions
+	for(i = 0; i < HEIGHT; i++) {
+		for(j = 0; j < WIDTH; j++) {
+			//Remove one from each used snake position
+			if(snakePos[i][j] != 0) {
+				snakePos[i][j]--;
+			}
+		}
+	}
+
+	//Set the head to the new position
+	if(direction2 == 0) {
+		placeHead2(currentX2-1, currentY2);
+	}
+	else if(direction2 == 1) {
+		placeHead2(currentX2, currentY2-1);
+	}
+	else if(direction2 == 2) {
+		placeHead2(currentX2, currentY2+1);		
+	}
+	else if(direction2 == 3) {
+		placeHead2(currentX2+1, currentY2);		
+	}
+}
+
 //Move the AI on the screen
 void moveAI() {
 	if(aiX < appleX && aiX >= 0) {

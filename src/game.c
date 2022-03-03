@@ -320,6 +320,23 @@ void moveObstacle1() {
 	snakePos[15][obstacle1X] = 4;
 }
 
+//Move obstacle3 back and forth on the y-axis
+void moveObstacle2() {
+	//Change the moving direction
+	if(obstacle2Y > HEIGHT - 3)
+		obstacle2Direction = 1;
+	else if(obstacle2Y < 3)
+		obstacle2Direction = 2;
+
+	//Move the obstacle
+	if(obstacle2Direction == 1)
+		placeObstacle2(obstacle2Y-1);
+	else
+		placeObstacle2(obstacle2Y+1);
+	
+	snakePos[obstacle2Y][63] = 4;
+}
+
 //Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT

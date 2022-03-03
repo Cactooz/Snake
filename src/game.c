@@ -15,6 +15,7 @@ unsigned short snakePos[HEIGHT][WIDTH];
 //The moving direction of the snake
 //0=left, 1=up, 2=down, 3=right
 unsigned char direction;
+unsigned char newDirection;
 
 //The length of the snake
 unsigned short length;
@@ -44,6 +45,8 @@ unsigned short aiLength;
 
 //Keeping track of the movement timings
 unsigned char moveCounter;
+//Keeping track of the steps, for changing direction each 3rd step
+unsigned char stepCounter;
 
 //Keeping track if the game is in hardMode
 unsigned char hardMode;
@@ -122,6 +125,7 @@ void initGame() {
 	unsigned char startX = rand() % (WIDTH/2) + (WIDTH/4);
 	unsigned char startY = rand() % (HEIGHT/2) + (HEIGHT/4);
 	direction = rand() % 4;
+	newDirection = direction;
 	
 	//Only add the AI in one player mode and hard mode
 	if(player == 1 && hardMode) {
@@ -179,20 +183,28 @@ void snakeDirection() {
 
 	//If button 4 is pressed go left
 	if(buttonState & 8 && direction != 3) {
-		direction = 0;
+		newDirection = 0;
 	}
 	//If button 3 is pressed go up
 	else if(buttonState & 4 && direction != 2) {
-		direction = 1;
+		newDirection = 1;
 	}
 	//If button 2 is pressed go down
 	else if(buttonState & 2 && direction != 1) {
-		direction = 2;
+		newDirection = 2;
 	}
 	//If button 1 is pressed go right
 	else if(buttonState & 1 && direction != 0) {
-		direction = 3;
+		newDirection = 3;
 	}
+
+	//Change the direction after 4 updates, while keeping the input responsivity
+	if(stepCounter > 4) {
+		direction = newDirection;
+		stepCounter = 0;
+	}
+	else
+		stepCounter++;
 }
 
 //Function for moving the snake around on the screen

@@ -57,8 +57,10 @@ unsigned short aiLength;
 
 //Keeping track of the movement timings
 unsigned char moveCounter;
-//Keeping track of the steps, for changing direction each 3rd step
+//Keeping track of the steps for the 1st snake
 unsigned char stepCounter;
+//Keeping track of the steps for the 2nd snake
+unsigned char stepCounter2;
 
 //Keeping track if the game is in hardMode
 unsigned char hardMode;

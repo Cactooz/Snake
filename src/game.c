@@ -93,6 +93,7 @@ void placeAiHead(unsigned char x, unsigned char y) {
 	aiY = y;
 }
 
+//Place the obstacle1 "head"
 void placeObstacle1(unsigned char x) {
 	//Set the position of the obstacle
 	snakePos[15][x] = 4;
@@ -292,6 +293,7 @@ void moveAI() {
 	}
 }
 
+//Move obstacle1 back and forth on the x-axis
 void moveObstacle1() {
 	//Change the moving direction
 	if(obstacle1X > WIDTH - 10)

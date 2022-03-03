@@ -80,6 +80,7 @@ void placeAiHead(unsigned char x, unsigned char y) {
 	aiY = y;
 }
 
+//Draw a one pixel border around the whole game area
 void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
@@ -167,6 +168,7 @@ void appleEat() {
 	}
 }
 
+//Check if the  AI ate an apple
 void aiAppleEat() {
 	if(aiX == appleX && aiY == appleY) {
 		//Remove the apple
@@ -318,6 +320,7 @@ void drawSnake() {
 	}
 }
 
+//Draw the apple on the screen
 void drawApple() {
 	//Add the apple to the screen buffer
 	updatePixel(appleX + 1, appleY + 1, 1);

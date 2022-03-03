@@ -459,8 +459,11 @@ void deathCheck() {
 		|| (direction == 0 && snakePos[currentY + 1][currentX - 1])
 		|| (direction == 1 && snakePos[currentY - 1][currentX + 1])
 		|| (direction == 2 && snakePos[currentY + 3][currentX + 1])
-		|| (direction == 3 && snakePos[currentY + 1][currentX + 3]))
-		alive = 0;
+		|| (direction == 3 && snakePos[currentY + 1][currentX + 3])) {
+			alive = 0;
+			if(player == 2)
+				winner = 2;
+		}
 }
 
 //Check if the 2nd snake is outside of the screen or if the head hits the tail and kill it
@@ -469,8 +472,10 @@ void deathCheck2() {
 		|| (direction2 == 0 && snakePos[currentY2 + 1][currentX2 - 1])
 		|| (direction2 == 1 && snakePos[currentY2 - 1][currentX2 + 1])
 		|| (direction2 == 2 && snakePos[currentY2 + 3][currentX2 + 1])
-		|| (direction2 == 3 && snakePos[currentY2 + 1][currentX2 + 3]))
-		alive2 = 0;
+		|| (direction2 == 3 && snakePos[currentY2 + 1][currentX2 + 3])) {
+			alive2 = 0;
+			winner = 1;
+		}
 }
 
 //Main function for running the game, returns 1 when game over

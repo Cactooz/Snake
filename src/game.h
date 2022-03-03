@@ -51,6 +51,8 @@ extern unsigned short length;
 extern unsigned char hardMode;
 //The amount of snakes
 extern unsigned char player;
+//The winner of the game in 2 player mode
+extern unsigned char winner;
 //Ai, true/false
 extern unsigned char ai;
 //Functions for highscore

@@ -24,6 +24,18 @@ unsigned short length;
 unsigned char currentX;
 unsigned char currentY;
 
+//The moving direction of the 2nd snake
+//0=left, 1=up, 2=down, 3=right
+unsigned char direction2;
+unsigned char newDirection2;
+
+//The length of the 2nd snake
+unsigned short length2;
+
+//The position of the 2nd snake
+unsigned char currentX2;
+unsigned char currentY2;
+
 //Keeping track of the apple count
 unsigned char appleCount;
 
@@ -33,6 +45,8 @@ unsigned char appleY;
 
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
+//Keep track if the 2nd snake is alive or not, 1 = alive, 0 = dead
+unsigned char alive2;
 
 //AI variables
 //Keeping track of AI moving direction
@@ -45,8 +59,10 @@ unsigned short aiLength;
 
 //Keeping track of the movement timings
 unsigned char moveCounter;
-//Keeping track of the steps, for changing direction each 3rd step
+//Keeping track of the steps for the 1st snake
 unsigned char stepCounter;
+//Keeping track of the steps for the 2nd snake
+unsigned char stepCounter2;
 
 //Keeping track if the game is in hardMode
 unsigned char hardMode;
@@ -54,6 +70,9 @@ unsigned char hardMode;
 //Keeping track of the amount of players
 unsigned char player;
 unsigned char ai;
+
+//Keeping track of who won in a 2 player game
+unsigned char winner;
 
 //Obstacle 1 variables
 //Keeping track of the obstacle1 moving direction
@@ -82,6 +101,22 @@ void placeHead(unsigned char x, unsigned char y) {
 	//Set the current position for the snake head
 	currentX = x;
 	currentY = y;
+}
+
+//Set the 2nd snake heads position
+void placeHead2(unsigned char x, unsigned char y) {
+	//Set the position of the snake head
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			snakePos[y+i][x+j] = length2;
+		}
+	}
+
+	//Set the current position for the snake head
+	currentX2 = x;
+	currentY2 = y;
 }
 
 //Place the AI head in the snakePos array
@@ -154,6 +189,7 @@ void initGame() {
 	appleCount = 0;
 	length = START_LENGTH;
 	alive = 1;
+	alive2 = 1;
 	moveCounter = 100;
 
 	//Get a random start position and moving direction
@@ -182,6 +218,21 @@ void initGame() {
 			//Put the starting position of the AI
 			placeAiHead(startAiX, startAiY);
 		}
+	}
+
+	//Init snake 2 if two player mode is chosen
+	if(player == 2) {
+		//Reset the data variables for the 2nd snake
+		length2 = START_LENGTH;
+
+		//Get a random start position and moving direction
+		unsigned char startX2 = rand() % (WIDTH/2) + (WIDTH/4);
+		unsigned char startY2 = rand() % (HEIGHT/2) + (HEIGHT/4);
+		direction2 = rand() % 4;
+		newDirection2 = direction2;
+
+		//Put the starting position of the 2nd snakes head
+		placeHead2(startX2, startY2);
 	}
 
 	//Put the starting position of the head
@@ -213,6 +264,22 @@ void eatApple() {
 				appleCount--;
 				//Increase the length of the snake
 				length++;
+			}
+		}
+	}
+}
+
+//Check if an apple gets eaten by the 2nd snake
+void eatApple2() {
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			if(currentX2+i == appleX && currentY2+j == appleY && appleCount) {
+				//Remove the apple
+				appleCount--;
+				//Increase the length of the 2nd snake
+				length2++;
 			}
 		}
 	}
@@ -259,6 +326,38 @@ void snakeDirection() {
 		stepCounter++;
 }
 
+
+//Change the snakeDirection for the 2nd snake depending on the switches
+void snakeDirection2() {
+	//Get the current pressed buttons
+	unsigned char switchState = getSwitches();
+
+	//If button 4 is pressed go left
+	if(switchState & 8 && direction2 != 3) {
+		newDirection2 = 0;
+	}
+	//If button 3 is pressed go up
+	else if(switchState & 4 && direction2 != 2) {
+		newDirection2 = 1;
+	}
+	//If button 2 is pressed go down
+	else if(switchState & 2 && direction2 != 1) {
+		newDirection2 = 2;
+	}
+	//If button 1 is pressed go right
+	else if(switchState & 1 && direction2 != 0) {
+		newDirection2 = 3;
+	}
+
+	//Change the direction after 6 updates, while keeping the input responsivity
+	if(stepCounter2 > 6) {
+		direction2 = newDirection2;
+		stepCounter2 = 0;
+	}
+	else
+		stepCounter2++;
+}
+
 //Function for moving the snake around on the screen
 void moveSnake() {	
 	unsigned char i;
@@ -285,6 +384,23 @@ void moveSnake() {
 	}
 	else if(direction == 3) {
 		placeHead(currentX+1, currentY);		
+	}
+}
+
+//Function for moving the 2nd snake around on the screen
+void moveSnake2() {	
+	//Set the head to the new position
+	if(direction2 == 0) {
+		placeHead2(currentX2-1, currentY2);
+	}
+	else if(direction2 == 1) {
+		placeHead2(currentX2, currentY2-1);
+	}
+	else if(direction2 == 2) {
+		placeHead2(currentX2, currentY2+1);		
+	}
+	else if(direction2 == 3) {
+		placeHead2(currentX2+1, currentY2);		
 	}
 }
 
@@ -344,8 +460,23 @@ void deathCheck() {
 		|| (direction == 0 && snakePos[currentY + 1][currentX - 1])
 		|| (direction == 1 && snakePos[currentY - 1][currentX + 1])
 		|| (direction == 2 && snakePos[currentY + 3][currentX + 1])
-		|| (direction == 3 && snakePos[currentY + 1][currentX + 3]))
-		alive = 0;
+		|| (direction == 3 && snakePos[currentY + 1][currentX + 3])) {
+			alive = 0;
+			if(player == 2)
+				winner = 2;
+		}
+}
+
+//Check if the 2nd snake is outside of the screen or if the head hits the tail and kill it
+void deathCheck2() {
+	if(currentX2 < 0 || currentX2 + 3 > WIDTH || currentY2 < 0 || currentY2 + 3 > HEIGHT
+		|| (direction2 == 0 && snakePos[currentY2 + 1][currentX2 - 1])
+		|| (direction2 == 1 && snakePos[currentY2 - 1][currentX2 + 1])
+		|| (direction2 == 2 && snakePos[currentY2 + 3][currentX2 + 1])
+		|| (direction2 == 3 && snakePos[currentY2 + 1][currentX2 + 3])) {
+			alive2 = 0;
+			winner = 1;
+		}
 }
 
 //Main function for running the game, returns 1 when game over
@@ -357,31 +488,71 @@ unsigned char runGame() {
 	//Check if the snakeDirection have changed
 	snakeDirection();
 
+	//Check if the snakeDirection have changed for the 2nd snake in 2 player mode
+	if(player == 2)
+		snakeDirection2();
+
 	//Only update every once in a while
 	if(moveCounter > 2) {
-		//Check if the snake died
-		deathCheck();
-		//Move the snake
-		if(alive) {
-			//Move the snake
-			moveSnake();
-			//Check if the snake ate the apple
-			eatApple();
-			//Display the points on the lamps
-			PORTE=(length-START_LENGTH);
+		if(player == 2) {
+			//Check if one of the snakes died
+			deathCheck();
+			deathCheck2();
 
-			if(hardMode) {
-				//Move the obstacles
-				moveObstacle1();
-				moveObstacle2();
+			//Move the snakes
+			if(alive & alive2) {
+				//Move the snakes
+				moveSnake();
+				moveSnake2();
+
+				//Check if the snakes ate the apple
+				eatApple();
+				eatApple2();
+
+				if(hardMode) {
+					//Move the obstacles
+					moveObstacle1();
+					moveObstacle2();
+					
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH)*2;
+				}
+				else {
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH);
+				}
 			}
+		}
+		else {
+			//Check if the snake died
+			deathCheck();
+			//Move the snake
+			if(alive) {
+				//Move the snake
+				moveSnake();
+				//Check if the snake ate the apple
+				eatApple();
 
-			//Only update the AI in one player mode and hard mode
-			if(player == 1 && hardMode) {
-				//Move the AI
-				moveAI();
-				//Check if the AI ate the apple
-				aiAppleEat();
+				if(hardMode) {
+					//Move the obstacles
+					moveObstacle1();
+					moveObstacle2();
+					
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH)*2;
+				}
+				else {
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH);
+				}
+
+				//Only update the AI in one player mode and hard mode
+				if(player == 1 && hardMode) {
+					//Move the AI
+					moveAI();
+					//Check if the AI ate the apple
+					aiAppleEat();
+				}
 			}
 		}
 		//Reset the counter
@@ -390,8 +561,8 @@ unsigned char runGame() {
 	else
 		moveCounter++;
 	
-	//Return the current state of the snake
-	return alive;
+	//Return the current state of the snakes
+	return alive & alive2;
 }
 
 //Draw the snake on the screen

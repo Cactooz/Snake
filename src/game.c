@@ -160,11 +160,17 @@ void placeApple() {
 
 //Check if an apple gets eaten
 void eatApple() {
-	if(currentX == appleX && currentY == appleY) {
-		//Remove the apple
-		appleCount--;
-		//Increase the length of the snake
-		length++;
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			if(currentX+i == appleX && currentY+j == appleY && appleCount) {
+				//Remove the apple
+				appleCount--;
+				//Increase the length of the snake
+				length++;
+			}
+		}
 	}
 }
 

@@ -2,64 +2,7 @@
 #include <pic32mx.h>
 #include "game.h"
 
-unsigned char displayBuffer[512] = //Skärmarrayen
-{ 
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,
-
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,
-
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,
-
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0
-};
+unsigned char displayBuffer[512];
 
 //One array for each capital letter A-Z
 char font[28][30] = 
@@ -94,6 +37,7 @@ char font[28][30] =
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //92 = EMPTY SPACE
 };
 
+//One array for digits 0 - 9
 char numberFont[10][30] = 
 {
   {1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1}, //Number 0
@@ -109,7 +53,7 @@ char numberFont[10][30] =
 };
 
 
-
+//Very simple delay function
 void quickDelay(int time) {
 	int i;
 	for(i = time; i > 0; i--);
@@ -159,8 +103,8 @@ void OledHostInit()
   //Initialize SPI port 2
   SPI2CON = 0;
   SPI2BRG = 15;
-  SPI2STATCLR = 0x40;//0100 0000 Bit 6, Family data sheet sida 61. SPIROV
-  SPI2CONSET = 0x40; // Bit 6, Family data sheet sida 61. CKP
+  SPI2STATCLR = 0x40;//0100 0000 Bit 6, Family data sheet, side 61. SPIROV
+  SPI2CONSET = 0x40; // Bit 6, Family data sheet, side 61. CKP
   SPI2CONSET = 0x20; //Bit 5 0010 0000, MSTEN
   SPI2CONSET = 0x8000; //Bit 15 1000 0000 0000 0000, ON
 
@@ -187,7 +131,7 @@ void OledDspInit()
   Spi2PutByte(0xAE);
 
   //Bring Reset low and then high
-  PORTGCLR = 0x200;// 0010 0000 0000 . RG9= Reset
+  PORTGCLR = 0x200;// 0010 0000 0000 . RG9 = Reset
   quickDelay(10);
   PORTGSET = 0x200;
   quickDelay(10);
@@ -267,10 +211,10 @@ void printCharacterAZ(char ch, unsigned char xPos, unsigned char yPos, unsigned 
 {
   int pixel;
   if(state == 1)
-    for(pixel = 0; pixel < 30; pixel++)
+    for(pixel = 0; pixel < 30; pixel++) //Updates every pixel in 5 x 6 area to show the specific character 
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), font[ch-0x41][pixel]);
   else if(state == 0)
-    for(pixel = 0; pixel < 30; pixel++)
+    for(pixel = 0; pixel < 30; pixel++) //Updates every pixel in 5 x 6 area to zero
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }
 
@@ -279,10 +223,10 @@ void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, uns
 {
   int pixel;
   if(state == 1)
-    for(pixel = 0; pixel < 30; pixel++)
+    for(pixel = 0; pixel < 30; pixel++) //Updates every pixel in 5 x 6 area to show the specific digit
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), numberFont[digit][pixel]);
   else if(state == 0)
-    for(pixel = 0; pixel < 30; pixel++)
+    for(pixel = 0; pixel < 30; pixel++) //Updates every pixel in 5 x 6 area to zero
       updatePixel(xPos + (pixel % 5), yPos + (pixel / 5), 0);
 }
 
@@ -291,15 +235,15 @@ void printDigit(unsigned char digit, unsigned char xPos, unsigned char yPos, uns
 void printWord(char* word, unsigned char length, unsigned char xPos, unsigned char yPos)
 {
 		int i;
-		for(i = 0; i < length*6; i += 6)
+		for(i = 0; i < length*6; i += 6) //6 pixels between each characters
 		{	
 			if(*word){
-        if(*word == 0x20) //Space
-          printCharacterAZ(92, xPos+i, yPos, 1);
+        if(*word == 0x20) //0x20 = Space
+          printCharacterAZ(92, xPos+i, yPos, 1); 
         else
-				  printCharacterAZ(*word, xPos+i, yPos, 1);
+				  printCharacterAZ(*word, xPos+i, yPos, 1); //Print the character that word points to
         }
-			word += 1;
+			word += 1; //Go to the next character
 		}
 }
 
@@ -312,7 +256,7 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos)
     while(tempNumber/=10) //Counts number of digits in number
       count++;
     
-    unsigned char numberArray[count];
+    unsigned char numberArray[count]; //Create an array that fits all digits 
 		int i;
     for(i = 0; i < count; i++) //Put every digit in array
     {
@@ -323,11 +267,12 @@ void printNumber(int number, unsigned char xPos, unsigned char yPos)
     int j = 0;
 		for(i = 0; i < count*6; i += 6)
     {
-				printDigit(numberArray[count - 1 - j], xPos+i, yPos, 1);
+				printDigit(numberArray[count - 1 - j], xPos+i, yPos, 1); //6 pixels between each digit
         j++;
     }
 }
 
+//Turn off every pixel
 void clearDisplay()
 {
   int i;

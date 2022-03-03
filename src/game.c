@@ -372,6 +372,7 @@ unsigned char runGame() {
 			if(hardMode) {
 				//Move the obstacles
 				moveObstacle1();
+				moveObstacle2();
 			}
 
 			//Only update the AI in one player mode and hard mode

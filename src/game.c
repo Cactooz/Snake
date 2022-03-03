@@ -320,7 +320,7 @@ void drawSnake() {
 			//Turn on the pixel if there is a value in the array, else turn it off
 			if(snakePos[y][x] != 0)
 				updatePixel(x+1,y+1, 1);
-			else
+			else if(appleX != x || appleY != y)
 				updatePixel(x+1,y+1, 0);
 		}
 	}

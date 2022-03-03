@@ -24,6 +24,18 @@ unsigned short length;
 unsigned char currentX;
 unsigned char currentY;
 
+//The moving direction of the 2nd snake
+//0=left, 1=up, 2=down, 3=right
+unsigned char direction2;
+unsigned char newDirection2;
+
+//The length of the 2nd snake
+unsigned short length2;
+
+//The position of the 2nd snake
+unsigned char currentX2;
+unsigned char currentY2;
+
 //Keeping track of the apple count
 unsigned char appleCount;
 

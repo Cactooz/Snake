@@ -366,13 +366,18 @@ unsigned char runGame() {
 			moveSnake();
 			//Check if the snake ate the apple
 			eatApple();
-			//Display the points on the lamps
-			PORTE=(length-START_LENGTH);
 
 			if(hardMode) {
 				//Move the obstacles
 				moveObstacle1();
 				moveObstacle2();
+				
+				//Display the points on the lamps
+				PORTE=(length-START_LENGTH)*2;
+			}
+			else {	
+				//Display the points on the lamps
+				PORTE=(length-START_LENGTH);
 			}
 
 			//Only update the AI in one player mode and hard mode

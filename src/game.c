@@ -93,6 +93,15 @@ void placeAiHead(unsigned char x, unsigned char y) {
 	aiY = y;
 }
 
+void placeObstacle1(unsigned char x) {
+	//Set the position of the obstacle
+	snakePos[15][x] = 4;
+	snakePos[16][x] = 4;
+
+	//Set the current position for the obstacle
+	obstacle1X = x;
+}
+
 //Draw a one pixel border around the whole game area
 void drawGameBorder() {
 	unsigned char i;
@@ -144,7 +153,7 @@ void initGame() {
 	if(hardMode) {
 		//Only add the obstacle in hardmode
 		//Setup obstacle1
-		obstacle1X = 10;
+		placeObstacle1(10);
 		obstacle1Direction = 3;
 		//Setup obstacle2
 		obstacle2Y = 3;
@@ -281,15 +290,6 @@ void moveAI() {
 	else if(aiY > appleY && aiY <= HEIGHT) {
 		placeAiHead(aiX, aiY-1);
 	}
-}
-
-void placeObstacle1(unsigned char x) {
-	//Set the position of the obstacle
-	snakePos[15][x] = 4;
-	snakePos[16][x] = 4;
-
-	//Set the current position for the obstacle
-	obstacle1X = x;
 }
 
 void moveObstacle1() {

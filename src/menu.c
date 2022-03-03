@@ -159,7 +159,7 @@ void chooseDifficulty()
 			}
 			if (getButtonsPress() & 4)
 			{
-				speed = 10;
+				hardMode = 0;
 				loop = 0;
 			}
 			
@@ -177,7 +177,7 @@ void chooseDifficulty()
 			}
 			if (getButtonsPress() & 4)
 			{
-				speed = 3;
+				hardMode = 1;
 				loop = 0;
 			}
 			break;

@@ -73,6 +73,27 @@ unsigned char addHighscore(int score)
     if(hardMode)
         score = score*2;
 
+    if(player == 2 && ai == 0) //2 player irl mode, no highscore
+    {
+        clearDisplay();
+        if(winner == 1) //Player 1 wins
+        {
+            printWord("PLAYER", 6, 27, 10);
+            printDigit(1, 64, 10, 1); //+37
+            printWord(" WINS", 4, 70, 10); //+6
+        } //73
+
+        else if(winner == 2) //Player 2 wins
+        {
+            printWord("PLAYER", 6, 27, 10);
+            printDigit(2, 64, 10, 1); //+37
+            printWord(" WINS", 4, 70, 10); //+6
+        }
+
+        delay(2000);
+
+        return 1; //Go back to menu
+    }
     if(score >= highscoreArray[2][2]) //You get a place on the leaderboard
     {
         char first;

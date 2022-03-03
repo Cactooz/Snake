@@ -285,8 +285,8 @@ void moveAI() {
 
 void placeObstacle1(unsigned char x) {
 	//Set the position of the obstacle
-	snakePos[15][x] = 8;
-	snakePos[16][x] = 8;
+	snakePos[15][x] = 4;
+	snakePos[16][x] = 4;
 
 	//Set the current position for the obstacle
 	obstacle1X = x;

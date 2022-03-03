@@ -167,7 +167,7 @@ void initGame() {
 		placeObstacle1(10);
 		obstacle1Direction = 3;
 		//Setup obstacle2
-		obstacle2Y = 3;
+		placeObstacle2(3);
 		obstacle2Direction = 2;
 
 		if(player == 1) {

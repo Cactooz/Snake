@@ -54,6 +54,19 @@ unsigned char hardMode;
 //Keeping track of the amount of players
 unsigned char player;
 
+//Obstacle 1 variables
+//Keeping track of the obstacle1 moving direction
+unsigned char obstacle1Direction;
+//The X position of the obstacle1
+unsigned char obstacle1X;
+
+//Obstacle 2 variables
+//Keeping track of the obstacle2 moving direction
+unsigned char obstacle2Direction;
+//The Y position of the obstacle2
+unsigned char obstacle2Y;
+
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
@@ -78,6 +91,26 @@ void placeAiHead(unsigned char x, unsigned char y) {
 	//Set the current position for the snake head
 	aiX = x;
 	aiY = y;
+}
+
+//Place the obstacle1 "head"
+void placeObstacle1(unsigned char x) {
+	//Set the position of the obstacle
+	snakePos[15][x] = 4;
+	snakePos[16][x] = 4;
+
+	//Set the current position for the obstacle
+	obstacle1X = x;
+}
+
+//Place the obstacle2 "head"
+void placeObstacle2(unsigned char y) {
+	//Set the position of the obstacle
+	snakePos[y][63] = 4;
+	snakePos[y][64] = 4;
+
+	//Set the current position for the obstacle
+	obstacle2Y = y;
 }
 
 //Draw a one pixel border around the whole game area
@@ -128,16 +161,26 @@ void initGame() {
 	direction = rand() % 4;
 	newDirection = direction;
 	
-	//Only add the AI in one player mode and hard mode
-	if(player == 1 && hardMode) {
-		//Set AI start position, moving direction and length
-		unsigned char startAiX = rand() % WIDTH;
-		unsigned char startAiY = rand() % HEIGHT;
-		aiDirection = rand() % 4;
-		aiLength = 5;
-		
-		//Put the starting position of the AI
-		placeAiHead(startAiX, startAiY);
+	if(hardMode) {
+		//Only add the obstacle in hardmode
+		//Setup obstacle1
+		placeObstacle1(10);
+		obstacle1Direction = 3;
+		//Setup obstacle2
+		placeObstacle2(3);
+		obstacle2Direction = 2;
+
+		if(player == 1) {
+			//Only add the AI in one player mode and hard mode
+			//Set AI start position, moving direction and length
+			unsigned char startAiX = rand() % WIDTH;
+			unsigned char startAiY = rand() % HEIGHT;
+			aiDirection = rand() % 4;
+			aiLength = 5;
+			
+			//Put the starting position of the AI
+			placeAiHead(startAiX, startAiY);
+		}
 	}
 
 	//Put the starting position of the head
@@ -260,6 +303,40 @@ void moveAI() {
 	}
 }
 
+//Move obstacle1 back and forth on the x-axis
+void moveObstacle1() {
+	//Change the moving direction
+	if(obstacle1X > WIDTH - 10)
+		obstacle1Direction = 0;
+	else if(obstacle1X < 10)
+		obstacle1Direction = 3;
+
+	//Move the obstacle
+	if(obstacle1Direction == 0)
+		placeObstacle1(obstacle1X-1);
+	else
+		placeObstacle1(obstacle1X+1);
+	
+	snakePos[15][obstacle1X] = 4;
+}
+
+//Move obstacle3 back and forth on the y-axis
+void moveObstacle2() {
+	//Change the moving direction
+	if(obstacle2Y > HEIGHT - 3)
+		obstacle2Direction = 1;
+	else if(obstacle2Y < 3)
+		obstacle2Direction = 2;
+
+	//Move the obstacle
+	if(obstacle2Direction == 1)
+		placeObstacle2(obstacle2Y-1);
+	else
+		placeObstacle2(obstacle2Y+1);
+	
+	snakePos[obstacle2Y][63] = 4;
+}
+
 //Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT
@@ -291,6 +368,12 @@ unsigned char runGame() {
 			eatApple();
 			//Display the points on the lamps
 			PORTE=(length-START_LENGTH);
+
+			if(hardMode) {
+				//Move the obstacles
+				moveObstacle1();
+				moveObstacle2();
+			}
 
 			//Only update the AI in one player mode and hard mode
 			if(player == 1 && hardMode) {

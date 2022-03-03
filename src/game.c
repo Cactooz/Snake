@@ -15,15 +15,10 @@ unsigned short snakePos[HEIGHT][WIDTH];
 //The moving direction of the snake
 //0=left, 1=up, 2=down, 3=right
 unsigned char direction;
+unsigned char newDirection;
 
 //The length of the snake
 unsigned short length;
-
-//Keeping track if the game is in hardMode
-unsigned char hardMode;
-
-//Keeping track of the amount of players
-unsigned char player;
 
 //The position of the snake
 unsigned char currentX;
@@ -39,9 +34,6 @@ unsigned char appleY;
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
 
-//Keeping track of the movement timings
-unsigned char moveCounter;
-
 //AI variables
 //Keeping track of AI moving direction
 unsigned char aiDirection;
@@ -50,6 +42,17 @@ unsigned char aiX;
 unsigned char aiY;
 //The length of the AI
 unsigned short aiLength;
+
+//Keeping track of the movement timings
+unsigned char moveCounter;
+//Keeping track of the steps, for changing direction each 3rd step
+unsigned char stepCounter;
+
+//Keeping track if the game is in hardMode
+unsigned char hardMode;
+
+//Keeping track of the amount of players
+unsigned char player;
 
 //Obstacle 1 variables
 //Keeping track of the obstacle1 moving direction
@@ -65,10 +68,17 @@ unsigned char obstacle2Direction;
 unsigned char obstacle2X;
 unsigned char obstacle2Y;
 
+
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head
-	snakePos[y][x] = length;
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			snakePos[y+i][x+j] = length;
+		}
+	}
 
 	//Set the current position for the snake head
 	currentX = x;
@@ -85,6 +95,7 @@ void placeAiHead(unsigned char x, unsigned char y) {
 	aiY = y;
 }
 
+//Draw a one pixel border around the whole game area
 void drawGameBorder() {
 	unsigned char i;
 	//Turn on the top and bottom row
@@ -130,6 +141,7 @@ void initGame() {
 	unsigned char startX = rand() % (WIDTH/2) + (WIDTH/4);
 	unsigned char startY = rand() % (HEIGHT/2) + (HEIGHT/4);
 	direction = rand() % 4;
+	newDirection = direction;
 	
 	if(hardMode) {
 		//Only add the obstacle in hardmode
@@ -161,8 +173,8 @@ void initGame() {
 
 //Place an apple on a random position on the screen
 void placeApple() {
-	unsigned char x = rand() % (WIDTH-2) + 1;
-	unsigned char y = rand() % (HEIGHT-2) + 1;
+	unsigned char x = rand() % (WIDTH-6) + 3;
+	unsigned char y = rand() % (HEIGHT-6) + 3;
 
 	//Place an apple if the snake isn't there
 	if(!snakePos[y][x]) {
@@ -174,15 +186,22 @@ void placeApple() {
 }
 
 //Check if an apple gets eaten
-void appleEat() {
-	if(currentX == appleX && currentY == appleY) {
-		//Remove the apple
-		appleCount--;
-		//Increase the length of the snake
-		length++;
+void eatApple() {
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			if(currentX+i == appleX && currentY+j == appleY && appleCount) {
+				//Remove the apple
+				appleCount--;
+				//Increase the length of the snake
+				length++;
+			}
+		}
 	}
 }
 
+//Check if the  AI ate an apple
 void aiAppleEat() {
 	if(aiX == appleX && aiY == appleY) {
 		//Remove the apple
@@ -199,20 +218,28 @@ void snakeDirection() {
 
 	//If button 4 is pressed go left
 	if(buttonState & 8 && direction != 3) {
-		direction = 0;
+		newDirection = 0;
 	}
 	//If button 3 is pressed go up
 	else if(buttonState & 4 && direction != 2) {
-		direction = 1;
+		newDirection = 1;
 	}
 	//If button 2 is pressed go down
 	else if(buttonState & 2 && direction != 1) {
-		direction = 2;
+		newDirection = 2;
 	}
 	//If button 1 is pressed go right
 	else if(buttonState & 1 && direction != 0) {
-		direction = 3;
+		newDirection = 3;
 	}
+
+	//Change the direction after 6 updates, while keeping the input responsivity
+	if(stepCounter > 6) {
+		direction = newDirection;
+		stepCounter = 0;
+	}
+	else
+		stepCounter++;
 }
 
 //Function for moving the snake around on the screen
@@ -260,13 +287,13 @@ void moveAI() {
 	}
 }
 
-//Check if the snake is outside of the screen and kill it
+//Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
-	if(currentX < 0 || currentX > WIDTH || currentY < 0 || currentY > HEIGHT
-		|| (direction == 0 && snakePos[currentY][currentX - 1])
-		|| (direction == 1 && snakePos[currentY - 1][currentX])
-		|| (direction == 2 && snakePos[currentY + 1][currentX])
-		|| (direction == 3 && snakePos[currentY][currentX + 1]))
+	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT
+		|| (direction == 0 && snakePos[currentY + 1][currentX - 1])
+		|| (direction == 1 && snakePos[currentY - 1][currentX + 1])
+		|| (direction == 2 && snakePos[currentY + 3][currentX + 1])
+		|| (direction == 3 && snakePos[currentY + 1][currentX + 3]))
 		alive = 0;
 }
 
@@ -288,7 +315,7 @@ unsigned char runGame() {
 			//Move the snake
 			moveSnake();
 			//Check if the snake ate the apple
-			appleEat();
+			eatApple();
 			//Display the points on the lamps
 			PORTE=(length-START_LENGTH);
 
@@ -320,12 +347,13 @@ void drawSnake() {
 			//Turn on the pixel if there is a value in the array, else turn it off
 			if(snakePos[y][x] != 0)
 				updatePixel(x+1,y+1, 1);
-			else
+			else if(appleX != x || appleY != y)
 				updatePixel(x+1,y+1, 0);
 		}
 	}
 }
 
+//Draw the apple on the screen
 void drawApple() {
 	//Add the apple to the screen buffer
 	updatePixel(appleX + 1, appleY + 1, 1);

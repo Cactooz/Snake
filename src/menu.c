@@ -17,46 +17,42 @@ void choosePlayerMode()
 	{
 		switch (select)
 		{
-		case 1: //-30
+		case 1:
 			printCharacterAZ(91, 25, 8, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
+			printWord("ONE PLAYER", 10, 35, 8);
+			printWord("TWO PLAYER", 10, 35, 16);
 			if(getButtonsPress() & 8) //Press BTN4 to scroll
 			{
 				printCharacterAZ(91, 25, 8, 0); //Remove Marker
 				delay(50);
-				select = 2;
+				select = 2; //Switch to case 2
 			}
 			if (getButtonsPress() & 4)
 			{
-				player = 1;
+				player = 1; //Set player mode to 1
 				chooseDifficulty();
-				loop = 0;
+				loop = 0; //Stop the loop
 			}
-			
 			break;
-		
 		case 2:
 			printCharacterAZ(91, 25, 16, 1); //Marker
-			printWord("ONEPLAYER", 9, 35, 8);
-			printWord("TWOPLAYER", 9, 35, 16);
+			printWord("ONE PLAYER", 10, 35, 8);
+			printWord("TWO PLAYER", 10, 35, 16);
 			if(getButtonsPress() & 8) //Press BTN4 to scroll
 			{
 				printCharacterAZ(91, 25, 16, 0); //Remove Marker
 				delay(50);
-				select = 1;
+				select = 1; //Switch to case 1
 			}
 			if (getButtonsPress() & 4)
 			{
-				player = 2;
+				player = 2; //Set player mode to 2
 				chooseDifficulty();
-				loop = 0;
+				loop = 0; //Stop the loop
 			}
 			break;
 		}
-
 	}
-
 }
 
 unsigned char runMenu()
@@ -67,6 +63,7 @@ unsigned char runMenu()
 	//Loading
 	if (runs)
 	{
+		//Light up each column separately
 		for (column = 0; column < 128; column++)
 		{
 			for(row = 0; row < 32; row++)
@@ -74,7 +71,8 @@ unsigned char runMenu()
 
 			delay(5);
 		}
-		clearDisplay();
+		//Turn off every pixel
+		clearDisplay(); 
 
 		//Display text
 		printWord("SNAKE", 5, 50, 0);
@@ -85,6 +83,7 @@ unsigned char runMenu()
 
 		delay(2000);
 
+		//Turn off every pixel
 		clearDisplay();
 
 		runs = 0; //Makes sure the loadingscreen only runs once :P
@@ -105,16 +104,15 @@ unsigned char runMenu()
 			{
 				printCharacterAZ(91, 40, 8, 0); //Remove Marker
 				delay(50);
-				select = 2;
+				select = 2; //Switch to case 2
 			}
-			if (getButtonsPress() & 4)
+			if (getButtonsPress() & 4) //Press BTN3 to select
 			{
 					delay(50);
 					choosePlayerMode();
-					return 1;
+					return 1; //Return 1 to start game
 			}
 			break;
-		
 		case 2:
 			printCharacterAZ(91, 20, 16, 1); //Marker
 			printWord("PLAY", 4, 50, 8);
@@ -123,16 +121,13 @@ unsigned char runMenu()
 			{
 				printCharacterAZ(91, 20, 16, 0); //Remove Marker
 				delay(50);
-				select = 1;
+				select = 1; //Switch to case 1
 			}
-			if (getButtonsPress() & 4)
-				return 2;
+			if (getButtonsPress() & 4) //Press BTN3 to select
+				return 2; //Return 2 to open leaderboard
 			break;            
 		}
 	}
-	
-
-	
 }
 
 void chooseDifficulty()
@@ -155,12 +150,12 @@ void chooseDifficulty()
 			{
 				printCharacterAZ(91, 40, 8, 0); //Remove Marker
 				delay(50);
-				select = 2;
+				select = 2; //Switch to case 2
 			}
-			if (getButtonsPress() & 4)
+			if (getButtonsPress() & 4) //Press BTN3 to select
 			{
 				hardMode = 0;
-				loop = 0;
+				loop = 0; //Stop loop
 			}
 			
 			break;
@@ -175,15 +170,13 @@ void chooseDifficulty()
 				delay(50);
 				select = 1;
 			}
-			if (getButtonsPress() & 4)
+			if (getButtonsPress() & 4) //Press BTN3 to select
 			{
 				hardMode = 1;
-				loop = 0;
+				loop = 0; //Stop loop
 			}
 			break;
 		}
-
 	}
-
 }
 

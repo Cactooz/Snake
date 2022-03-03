@@ -46,7 +46,7 @@ void drawGame();
 //The length of the snake
 extern unsigned short length;
 //The start length of the snake 
-#define START_LENGTH 5
+#define START_LENGTH 12
 //Keeping track of if the game is in hardMode
 extern unsigned char hardMode;
 //The amount of snakes

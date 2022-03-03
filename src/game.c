@@ -53,6 +53,7 @@ unsigned char hardMode;
 
 //Keeping track of the amount of players
 unsigned char player;
+unsigned char ai;
 
 //Obstacle 1 variables
 //Keeping track of the obstacle1 moving direction

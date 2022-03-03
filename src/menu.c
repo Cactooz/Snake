@@ -5,6 +5,56 @@
 
 int runs = 1;
 
+void chooseAiMode()
+{
+	int row;
+	int column;
+	//Turn off every pixel
+	clearDisplay();
+	int select = 1;
+	unsigned char loop = 1;
+	while (loop)
+	{
+		switch (select)
+		{
+		case 1:
+			printCharacterAZ(91, 50, 8, 1); //Marker
+			printWord("AI", 2, 60, 8);
+			printWord("IRL", 3, 55, 16);
+			if(getButtonsPress() & 8) //Press BTN4 to scroll
+			{
+				printCharacterAZ(91, 50, 8, 0); //Remove Marker
+				delay(50);
+				select = 2; //Switch to case 2
+			}
+			if (getButtonsPress() & 4)
+			{
+				Ai = 1; //Set player mode to 1
+				chooseDifficulty();
+				loop = 0; //Stop the loop
+			}
+			break;
+		case 2:
+			printCharacterAZ(91, 45, 16, 1); //Marker
+			printWord("AI", 2, 60, 8);
+			printWord("IRL", 3, 55, 16);
+			if(getButtonsPress() & 8) //Press BTN4 to scroll
+			{
+				printCharacterAZ(91, 45, 16, 0); //Remove Marker
+				delay(50);
+				select = 1; //Switch to case 1
+			}
+			if (getButtonsPress() & 4)
+			{
+				Ai = 0; //Set player mode to 2
+				chooseDifficulty();
+				loop = 0; //Stop the loop
+			}
+			break;
+		}
+	}
+}
+
 void choosePlayerMode()
 {
 	int row;
@@ -47,7 +97,7 @@ void choosePlayerMode()
 			if (getButtonsPress() & 4)
 			{
 				player = 2; //Set player mode to 2
-				chooseDifficulty();
+				chooseAiMode();
 				loop = 0; //Stop the loop
 			}
 			break;
@@ -180,3 +230,6 @@ void chooseDifficulty()
 	}
 }
 
+
+
+//TWO PLAYER -> AI/IRL -> Difficulty, AI TRUE/FALSE

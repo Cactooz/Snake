@@ -283,6 +283,15 @@ void moveAI() {
 	}
 }
 
+void placeObstacle1(unsigned char x) {
+	//Set the position of the obstacle
+	snakePos[15][x] = 8;
+	snakePos[16][x] = 8;
+
+	//Set the current position for the obstacle
+	obstacle1X = x;
+}
+
 //Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT

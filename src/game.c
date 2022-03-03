@@ -188,6 +188,7 @@ void initGame() {
 	appleCount = 0;
 	length = START_LENGTH;
 	alive = 1;
+	alive2 = 1;
 	moveCounter = 100;
 
 	//Get a random start position and moving direction
@@ -221,7 +222,6 @@ void initGame() {
 	//Init snake 2 if two player mode is chosen
 	if(player == 2) {
 		//Reset the data variables for the 2nd snake
-		alive2 = 1;
 		length2 = START_LENGTH;
 
 		//Get a random start position and moving direction

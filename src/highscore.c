@@ -69,6 +69,10 @@ unsigned char displayHighscore()
 //Adds a highscore to the array if the score places top 3
 unsigned char addHighscore(int score)
 {
+    //Double points for hardmode
+    if(hardMode)
+        score = score*2;
+
     if(score >= highscoreArray[2][2]) //You get a place on the leaderboard
     {
         char first;

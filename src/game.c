@@ -159,7 +159,7 @@ void placeApple() {
 }
 
 //Check if an apple gets eaten
-void appleEat() {
+void eatApple() {
 	if(currentX == appleX && currentY == appleY) {
 		//Remove the apple
 		appleCount--;
@@ -282,7 +282,7 @@ unsigned char runGame() {
 			//Move the snake
 			moveSnake();
 			//Check if the snake ate the apple
-			appleEat();
+			eatApple();
 			//Display the points on the lamps
 			PORTE=(length-START_LENGTH);
 

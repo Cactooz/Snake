@@ -200,8 +200,8 @@ void snakeDirection() {
 		newDirection = 3;
 	}
 
-	//Change the direction after 4 updates, while keeping the input responsivity
-	if(stepCounter > 4) {
+	//Change the direction after 6 updates, while keeping the input responsivity
+	if(stepCounter > 6) {
 		direction = newDirection;
 		stepCounter = 0;
 	}

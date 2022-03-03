@@ -340,6 +340,11 @@ unsigned char runGame() {
 			//Display the points on the lamps
 			PORTE=(length-START_LENGTH);
 
+			if(hardMode) {
+				//Move the obstacles
+				moveObstacle1();
+			}
+
 			//Only update the AI in one player mode and hard mode
 			if(player == 1 && hardMode) {
 				//Move the AI

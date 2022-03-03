@@ -146,8 +146,8 @@ void initGame() {
 
 //Place an apple on a random position on the screen
 void placeApple() {
-	unsigned char x = rand() % (WIDTH-2) + 1;
-	unsigned char y = rand() % (HEIGHT-2) + 1;
+	unsigned char x = rand() % (WIDTH-6) + 3;
+	unsigned char y = rand() % (HEIGHT-6) + 3;
 
 	//Place an apple if the snake isn't there
 	if(!snakePos[y][x]) {

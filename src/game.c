@@ -456,6 +456,16 @@ void deathCheck() {
 		alive = 0;
 }
 
+//Check if the 2nd snake is outside of the screen or if the head hits the tail and kill it
+void deathCheck2() {
+	if(currentX2 < 0 || currentX2 + 3 > WIDTH || currentY2 < 0 || currentY2 + 3 > HEIGHT
+		|| (direction2 == 0 && snakePos[currentY2 + 1][currentX2 - 1])
+		|| (direction2 == 1 && snakePos[currentY2 - 1][currentX2 + 1])
+		|| (direction2 == 2 && snakePos[currentY2 + 3][currentX2 + 1])
+		|| (direction2 == 3 && snakePos[currentY2 + 1][currentX2 + 3]))
+		alive2 = 0;
+}
+
 //Main function for running the game, returns 1 when game over
 unsigned char runGame() {
 	//Place an apple if there are non on the screen

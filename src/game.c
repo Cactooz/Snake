@@ -103,6 +103,16 @@ void placeObstacle1(unsigned char x) {
 	obstacle1X = x;
 }
 
+//Place the obstacle2 "head"
+void placeObstacle2(unsigned char y) {
+	//Set the position of the obstacle
+	snakePos[y][63] = 4;
+	snakePos[y][64] = 4;
+
+	//Set the current position for the obstacle
+	obstacle2Y = y;
+}
+
 //Draw a one pixel border around the whole game area
 void drawGameBorder() {
 	unsigned char i;

@@ -80,6 +80,7 @@ void choosePlayerMode()
 			if (getButtonsPress() & 4)
 			{
 				player = 1; //Set player mode to 1
+				ai = 0;
 				chooseDifficulty();
 				loop = 0; //Stop the loop
 			}

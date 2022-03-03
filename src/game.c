@@ -45,6 +45,8 @@ unsigned char appleY;
 
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
+//Keep track if the 2nd snake is alive or not, 1 = alive, 0 = dead
+unsigned char alive2;
 
 //AI variables
 //Keeping track of AI moving direction

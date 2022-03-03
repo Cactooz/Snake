@@ -222,7 +222,6 @@ void initGame() {
 	if(player == 2) {
 		//Reset the data variables for the 2nd snake
 		alive2 = 1;
-		moveCounter = 2;
 		length2 = START_LENGTH;
 
 		//Get a random start position and moving direction

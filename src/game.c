@@ -95,6 +95,22 @@ void placeHead(unsigned char x, unsigned char y) {
 	currentY = y;
 }
 
+//Set the 2nd snake heads position
+void placeHead2(unsigned char x, unsigned char y) {
+	//Set the position of the snake head
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			snakePos[y+i][x+j] = length2;
+		}
+	}
+
+	//Set the current position for the snake head
+	currentX2 = x;
+	currentY2 = y;
+}
+
 //Place the AI head in the snakePos array
 void placeAiHead(unsigned char x, unsigned char y) {
 	//Set the position of the snake head

@@ -220,6 +220,11 @@ void initGame() {
 
 	//Init snake 2 if two player mode is chosen
 	if(player == 2) {
+		//Reset the data variables for the 2nd snake
+		alive2 = 1;
+		moveCounter = 2;
+		length2 = START_LENGTH;
+
 		//Get a random start position and moving direction
 		unsigned char startX2 = rand() % (WIDTH/2) + (WIDTH/4);
 		unsigned char startY2 = rand() % (HEIGHT/2) + (HEIGHT/4);

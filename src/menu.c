@@ -29,7 +29,7 @@ void chooseAiMode()
 			}
 			if (getButtonsPress() & 4)
 			{
-				Ai = 1; //Set player mode to 1
+				ai = 1; //Set player mode to 1
 				chooseDifficulty();
 				loop = 0; //Stop the loop
 			}
@@ -46,7 +46,7 @@ void chooseAiMode()
 			}
 			if (getButtonsPress() & 4)
 			{
-				Ai = 0; //Set player mode to 2
+				ai = 0; //Set player mode to 2
 				chooseDifficulty();
 				loop = 0; //Stop the loop
 			}

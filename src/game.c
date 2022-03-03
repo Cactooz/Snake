@@ -144,11 +144,11 @@ void initGame() {
 	if(hardMode) {
 		//Only add the obstacle in hardmode
 		//Setup obstacle1
-		obstacle1X = 3;
-		obstacle1Direction = rand() % 4;
+		obstacle1X = 10;
+		obstacle1Direction = 3;
 		//Setup obstacle2
-		obstacle2Y = 22;
-		obstacle2Direction = rand() % 4;
+		obstacle2Y = 3;
+		obstacle2Direction = 2;
 
 		if(player == 1) {
 			//Only add the AI in one player mode and hard mode

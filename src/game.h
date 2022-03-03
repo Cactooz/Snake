@@ -53,6 +53,8 @@ extern unsigned char hardMode;
 extern unsigned char player;
 //The winner of the game in 2 player mode
 extern unsigned char winner;
+//Ai, true/false
+extern unsigned char ai;
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);

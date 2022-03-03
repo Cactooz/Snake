@@ -69,6 +69,7 @@ unsigned char hardMode;
 
 //Keeping track of the amount of players
 unsigned char player;
+unsigned char ai;
 
 //Keeping track of who won in a 2 player game
 unsigned char winner;

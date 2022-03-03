@@ -304,6 +304,38 @@ void snakeDirection() {
 		stepCounter++;
 }
 
+
+//Change the snakeDirection for the 2nd snake depending on the switches
+void snakeDirection2() {
+	//Get the current pressed buttons
+	unsigned char switchState = getSwitches();
+
+	//If button 4 is pressed go left
+	if(switchState & 8 && direction2 != 3) {
+		newDirection2 = 0;
+	}
+	//If button 3 is pressed go up
+	else if(switchState & 4 && direction2 != 2) {
+		newDirection2 = 1;
+	}
+	//If button 2 is pressed go down
+	else if(switchState & 2 && direction2 != 1) {
+		newDirection2 = 2;
+	}
+	//If button 1 is pressed go right
+	else if(switchState & 1 && direction2 != 0) {
+		newDirection2 = 3;
+	}
+
+	//Change the direction after 6 updates, while keeping the input responsivity
+	if(stepCounter2 > 6) {
+		direction2 = newDirection2;
+		stepCounter2 = 0;
+	}
+	else
+		stepCounter2++;
+}
+
 //Function for moving the snake around on the screen
 void moveSnake() {	
 	unsigned char i;

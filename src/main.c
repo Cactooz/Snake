@@ -29,7 +29,7 @@ void init() {
 	//Initialize Timer2
   	T2CONSET = 0x70; //0111 0000, Sets prescale to 1:256
   	IFSCLR(0) = 0x100;//0001 0000 0000
-  	PR2 = 31250;
+  	PR2 = 7812; //40 FPS
   	TMR2 = 0;
   	T2CONSET = 0x08000; // 1000 0000 0000 0000, Start timer
 
@@ -108,8 +108,6 @@ int main() {
 			default:
 				break;
 		}
-		//Delay 33ms
-		delay(33);
 	}
 
 	return 0;

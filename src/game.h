@@ -51,6 +51,8 @@ extern unsigned short length;
 extern unsigned char hardMode;
 //The amount of snakes
 extern unsigned char player;
+//The winner of the game in 2 player mode
+extern unsigned char winner;
 //Functions for highscore
 unsigned char displayHighscore();
 unsigned char addHighscore(int score);

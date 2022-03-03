@@ -70,6 +70,9 @@ unsigned char hardMode;
 //Keeping track of the amount of players
 unsigned char player;
 
+//Keeping track of who won in a 2 player game
+unsigned char winner;
+
 //Obstacle 1 variables
 //Keeping track of the obstacle1 moving direction
 unsigned char obstacle1Direction;

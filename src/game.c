@@ -245,6 +245,22 @@ void eatApple() {
 	}
 }
 
+//Check if an apple gets eaten by the 2nd snake
+void eatApple2() {
+	unsigned char i;
+	unsigned char j;
+	for(i = 0; i < 3; i++) {
+		for(j = 0; j < 3; j++) {
+			if(currentX2+i == appleX && currentY2+j == appleY && appleCount) {
+				//Remove the apple
+				appleCount--;
+				//Increase the length of the 2nd snake
+				length2++;
+			}
+		}
+	}
+}
+
 //Check if the  AI ate an apple
 void aiAppleEat() {
 	if(aiX == appleX && aiY == appleY) {

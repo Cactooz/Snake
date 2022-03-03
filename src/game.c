@@ -292,6 +292,22 @@ void placeObstacle1(unsigned char x) {
 	obstacle1X = x;
 }
 
+void moveObstacle1() {
+	//Change the moving direction
+	if(obstacle1X > WIDTH - 10)
+		obstacle1Direction = 0;
+	else if(obstacle1X < 10)
+		obstacle1Direction = 3;
+
+	//Move the obstacle
+	if(obstacle1Direction == 0)
+		placeObstacle1(obstacle1X-1);
+	else
+		placeObstacle1(obstacle1X+1);
+	
+	snakePos[15][obstacle1X] = 4;
+}
+
 //Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
 	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT

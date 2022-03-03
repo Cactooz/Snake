@@ -218,6 +218,18 @@ void initGame() {
 		}
 	}
 
+	//Init snake 2 if two player mode is chosen
+	if(player == 2) {
+		//Get a random start position and moving direction
+		unsigned char startX2 = rand() % (WIDTH/2) + (WIDTH/4);
+		unsigned char startY2 = rand() % (HEIGHT/2) + (HEIGHT/4);
+		direction2 = rand() % 4;
+		newDirection2 = direction2;
+
+		//Put the starting position of the 2nd snakes head
+		placeHead2(startX2, startY2);
+	}
+
 	//Put the starting position of the head
 	placeHead(startX, startY);
 }

@@ -29,7 +29,7 @@ unsigned char getButtonsPress() {
 	//Save the output to the oldState for next time
 	oldButtonState = newButtonState;
 
-	delay(50);
+	delay(75);
 
 	return newButtonState;
 }

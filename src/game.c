@@ -57,15 +57,13 @@ unsigned char player;
 //Obstacle 1 variables
 //Keeping track of the obstacle1 moving direction
 unsigned char obstacle1Direction;
-//The position of the obstacle1
+//The X position of the obstacle1
 unsigned char obstacle1X;
-unsigned char obstacle1Y;
 
 //Obstacle 2 variables
-//Keeping track of the obstacle1 moving direction
+//Keeping track of the obstacle2 moving direction
 unsigned char obstacle2Direction;
-//The position of the obstacle1
-unsigned char obstacle2X;
+//The Y position of the obstacle2
 unsigned char obstacle2Y;
 
 
@@ -147,10 +145,8 @@ void initGame() {
 		//Only add the obstacle in hardmode
 		//Setup obstacle1
 		obstacle1X = 3;
-		obstacle1Y = 3;
 		obstacle1Direction = rand() % 4;
 		//Setup obstacle2
-		obstacle2X = 118;
 		obstacle2Y = 22;
 		obstacle2Direction = rand() % 4;
 

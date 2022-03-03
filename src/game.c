@@ -19,12 +19,6 @@ unsigned char direction;
 //The length of the snake
 unsigned short length;
 
-//Keeping track if the game is in hardMode
-unsigned char hardMode;
-
-//Keeping track of the amount of players
-unsigned char player;
-
 //The position of the snake
 unsigned char currentX;
 unsigned char currentY;
@@ -39,9 +33,6 @@ unsigned char appleY;
 //Keep track if the snake is alive or not, 1 = alive, 0 = dead
 unsigned char alive;
 
-//Keeping track of the movement timings
-unsigned char moveCounter;
-
 //AI variables
 //Keeping track of AI moving direction
 unsigned char aiDirection;
@@ -50,6 +41,15 @@ unsigned char aiX;
 unsigned char aiY;
 //The length of the AI
 unsigned short aiLength;
+
+//Keeping track of the movement timings
+unsigned char moveCounter;
+
+//Keeping track if the game is in hardMode
+unsigned char hardMode;
+
+//Keeping track of the amount of players
+unsigned char player;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {

@@ -154,7 +154,7 @@ void chooseDifficulty()
 			}
 			if (getButtonsPress() & 4) //Press BTN3 to select
 			{
-				speed = 10;
+				hardMode = 0;
 				loop = 0; //Stop loop
 			}
 			
@@ -172,7 +172,7 @@ void chooseDifficulty()
 			}
 			if (getButtonsPress() & 4) //Press BTN3 to select
 			{
-				speed = 3;
+				hardMode = 1;
 				loop = 0; //Stop loop
 			}
 			break;

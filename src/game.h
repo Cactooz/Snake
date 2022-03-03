@@ -43,13 +43,13 @@ void initGame();
 unsigned char runGame();
 void drawGame();
 
-//Variable for the length of the snake
+//The length of the snake
 extern unsigned short length;
-//Constant for the start length of the snake 
-#define START_LENGTH 5
-//Variable for the speed of the snake
-extern unsigned char speed;
-//Variable for the amount of snakes
+//The start length of the snake 
+#define START_LENGTH 12
+//Keeping track of if the game is in hardMode
+extern unsigned char hardMode;
+//The amount of snakes
 extern unsigned char player;
 //Functions for highscore
 unsigned char displayHighscore();

@@ -59,6 +59,8 @@ unsigned short aiLength;
 
 //Keeping track of the movement timings
 unsigned char moveCounter;
+//Keeping track of the AI movement timings
+unsigned char aiMoveCounter;
 //Keeping track of the steps for the 1st snake
 unsigned char stepCounter;
 //Keeping track of the steps for the 2nd snake
@@ -69,6 +71,8 @@ unsigned char hardMode;
 
 //Keeping track of the amount of players
 unsigned char player;
+
+//Keeping track if the player should play against an AI
 unsigned char ai;
 
 //Keeping track of who won in a 2 player game
@@ -208,20 +212,24 @@ void initGame() {
 		obstacle2Direction = 2;
 
 		if(player == 1) {
-			//Only add the AI in one player mode and hard mode
-			//Set AI start position, moving direction and length
-			unsigned char startAiX = rand() % WIDTH;
-			unsigned char startAiY = rand() % HEIGHT;
-			aiDirection = rand() % 4;
-			aiLength = 5;
-			
-			//Put the starting position of the AI
-			placeAiHead(startAiX, startAiY);
+
 		}
 	}
 
+	if(ai) {
+		//Set AI start position, moving direction and length
+		unsigned char startAiX = rand() % WIDTH;
+		unsigned char startAiY = rand() % HEIGHT;
+		aiDirection = rand() % 4;
+		aiLength = 5;
+		aiMoveCounter = 100;
+		
+		//Put the starting position of the AI
+		placeAiHead(startAiX, startAiY);
+	}
+
 	//Init snake 2 if two player mode is chosen
-	if(player == 2) {
+	if(player == 2 && !ai) {
 		//Reset the data variables for the 2nd snake
 		length2 = START_LENGTH;
 
@@ -494,7 +502,7 @@ unsigned char runGame() {
 
 	//Only update every once in a while
 	if(moveCounter > 2) {
-		if(player == 2) {
+		if(player == 2 && !ai) {
 			//Check if one of the snakes died
 			deathCheck();
 			deathCheck2();
@@ -533,7 +541,7 @@ unsigned char runGame() {
 				//Check if the snake ate the apple
 				eatApple();
 
-				if(hardMode) {
+				if(hardMode && !ai) {
 					//Move the obstacles
 					moveObstacle1();
 					moveObstacle2();
@@ -546,10 +554,20 @@ unsigned char runGame() {
 					PORTE=(length-START_LENGTH);
 				}
 
-				//Only update the AI in one player mode and hard mode
-				if(player == 1 && hardMode) {
-					//Move the AI
-					moveAI();
+				//Only update the AI in two player mode vs AI
+				if(ai) {
+					if(!hardMode) {
+						if(aiMoveCounter > 0) {
+							moveAI();
+							aiMoveCounter = 0;
+						}
+						else
+							aiMoveCounter++;
+					}
+					else {
+						//Move the AI
+						moveAI();
+					}
 					//Check if the AI ate the apple
 					aiAppleEat();
 				}

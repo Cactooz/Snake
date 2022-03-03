@@ -482,36 +482,71 @@ unsigned char runGame() {
 	//Check if the snakeDirection have changed
 	snakeDirection();
 
+	//Check if the snakeDirection have changed for the 2nd snake in 2 player mode
+	if(player == 2)
+		snakeDirection2();
+
 	//Only update every once in a while
 	if(moveCounter > 2) {
-		//Check if the snake died
-		deathCheck();
-		//Move the snake
-		if(alive) {
+		if(player == 2) {
+			//Check if one of the snakes died
+			deathCheck();
+			deathCheck2();
+
+			//Move the snakes
+			if(alive & alive2) {
+				//Move the snakes
+				moveSnake();
+				moveSnake2();
+
+				//Check if the snakes ate the apple
+				eatApple();
+				eatApple2();
+
+				if(hardMode) {
+					//Move the obstacles
+					moveObstacle1();
+					moveObstacle2();
+					
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH)*2;
+				}
+				else {
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH);
+				}
+			}
+		}
+		else {
+			//Check if the snake died
+			deathCheck();
 			//Move the snake
-			moveSnake();
-			//Check if the snake ate the apple
-			eatApple();
+			if(alive) {
+				//Move the snake
+				moveSnake();
+				//Check if the snake ate the apple
+				eatApple();
 
-			if(hardMode) {
-				//Move the obstacles
-				moveObstacle1();
-				moveObstacle2();
-				
-				//Display the points on the lamps
-				PORTE=(length-START_LENGTH)*2;
-			}
-			else {	
-				//Display the points on the lamps
-				PORTE=(length-START_LENGTH);
-			}
+				if(hardMode) {
+					//Move the obstacles
+					moveObstacle1();
+					moveObstacle2();
+					
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH)*2;
+				}
+				else {
+					//Display the points on the lamps
+					PORTE=(length-START_LENGTH);
+				}
 
-			//Only update the AI in one player mode and hard mode
-			if(player == 1 && hardMode) {
-				//Move the AI
-				moveAI();
-				//Check if the AI ate the apple
-				aiAppleEat();
+				//Only update the AI in one player mode and hard mode
+				if(player == 1 && hardMode) {
+					//Move the AI
+					moveAI();
+					//Check if the AI ate the apple
+					aiAppleEat();
+				}
 			}
 		}
 		//Reset the counter
@@ -520,8 +555,8 @@ unsigned char runGame() {
 	else
 		moveCounter++;
 	
-	//Return the current state of the snake
-	return alive;
+	//Return the current state of the snakes
+	return alive & alive2;
 }
 
 //Draw the snake on the screen

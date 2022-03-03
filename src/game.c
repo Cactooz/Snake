@@ -53,6 +53,7 @@ unsigned char hardMode;
 
 //Keeping track of the amount of players
 unsigned char player;
+unsigned char Ai;
 
 //Set the snake heads position
 void placeHead(unsigned char x, unsigned char y) {

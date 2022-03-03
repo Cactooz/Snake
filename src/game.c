@@ -242,11 +242,11 @@ void moveAI() {
 
 //Check if the snake is outside of the screen or if the head hits the tail and kill it
 void deathCheck() {
-		|| (direction == 0 && (snakePos[currentY][currentX - 1] || snakePos[currentY + 1][currentX - 1] || snakePos[currentY + 2][currentX - 1]))
-		|| (direction == 1 && (snakePos[currentY - 1][currentX] || snakePos[currentY - 1][currentX + 1] || snakePos[currentY - 1][currentX + 2]))
-		|| (direction == 2 && (snakePos[currentY + 3][currentX] || snakePos[currentY + 3][currentX + 1] || snakePos[currentY + 3][currentX + 2]))
-		|| (direction == 3 && (snakePos[currentY][currentX + 3] || snakePos[currentY + 1][currentX + 3] || snakePos[currentY + 2][currentX + 3])))
 	if(currentX < 0 || currentX + 3 > WIDTH || currentY < 0 || currentY + 3 > HEIGHT
+		|| (direction == 0 && snakePos[currentY + 1][currentX - 1])
+		|| (direction == 1 && snakePos[currentY - 1][currentX + 1])
+		|| (direction == 2 && snakePos[currentY + 3][currentX + 1])
+		|| (direction == 3 && snakePos[currentY + 1][currentX + 3]))
 		alive = 0;
 }
 

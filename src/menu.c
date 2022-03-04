@@ -231,7 +231,3 @@ void chooseDifficulty()
 		}
 	}
 }
-
-
-
-//TWO PLAYER -> AI/IRL -> Difficulty, AI TRUE/FALSE

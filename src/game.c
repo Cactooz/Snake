@@ -57,7 +57,7 @@ unsigned char aiY;
 //The length of the AI
 unsigned short aiLength;
 
-//Keeping track of the movement timings
+//Keeping track of the movement timings, makes the snake slower than the buttoninput
 unsigned char moveCounter;
 //Keeping track of the AI movement timings
 unsigned char aiMoveCounter;

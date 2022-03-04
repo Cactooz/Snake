@@ -102,8 +102,8 @@ unsigned char addHighscore(int score)
         printWord("SELECT", 6, 65, 2);
         updatePixel(61, 21, 1);
         char ch = 'A';
-        unsigned char x = 1;
-        while (x == 1) //Choose first character
+        unsigned char initial = 1; //Choose which initial
+        while (initial == 1) //Choose first character
         {
             printCharacterAZ(ch, 55, 16, 1);
             if (getButtonsPress() & 0x8) //BTN4 Change character
@@ -119,14 +119,14 @@ unsigned char addHighscore(int score)
             if(getButtonsPress() & 0x4) //BTN3 Select character
             {
                 first = ch;
-                x = 2;
+                initial = 2;
                 delay(300);
             }
         }
 
         ch = 'A';
 
-        while (x == 2) //Choose second character
+        while (initial == 2) //Choose second character
         {
             printCharacterAZ(ch, 63, 16, 1);
             if (getButtonsPress() & 0x8) //BTN4 Change character
@@ -139,7 +139,7 @@ unsigned char addHighscore(int score)
             if(getButtonsPress() & 0x4) //BTN3 Select character
             {
                 second = ch;
-                x = 3;
+                initial = 3; //Stop the while loop
                 delay(300);
             }
 

@@ -541,18 +541,19 @@ unsigned char runGame() {
 				//Check if the snake ate the apple
 				eatApple();
 
+				//Only add obstacles in hardMode without AI
 				if(hardMode && !ai) {
 					//Move the obstacles
 					moveObstacle1();
 					moveObstacle2();
-					
+				}
+
+				if(hardMode)
 					//Display the points on the lamps
 					PORTE=(length-START_LENGTH)*2;
-				}
-				else {
+				else
 					//Display the points on the lamps
 					PORTE=(length-START_LENGTH);
-				}
 
 				//Only update the AI in two player mode vs AI
 				if(ai) {
